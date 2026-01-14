@@ -53,7 +53,7 @@ export default function CineScopeProject() {
               </Button>
               <Button asChild variant="outline" size="lg">
                 <a 
-                  href="https://github.com/Pranavchikte/cinescope-api" 
+                  href="https://github.com/Pranavchikte/cinescope-backend" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2"
@@ -334,7 +334,7 @@ export default function CineScopeProject() {
               </Button>
               <Button asChild variant="outline" size="lg">
                 <a 
-                  href="https://github.com/Pranavchikte/cinescope-api" 
+                  href="https://github.com/Pranavchikte/cinescope-backend" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2"

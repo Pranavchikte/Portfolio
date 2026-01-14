@@ -20,7 +20,7 @@ const featuredProjects = [
     image: "/m1.png",
     problem: "It's hard to find info, new releases, and trending movies all in one place.",
     stack: ["Flask", "React", "TMDB API", "Celery", "Redis", "DigitalOcean"],
-    githubUrl: "https://github.com/Pranavchikte/cinescope-api",
+    githubUrl: "https://github.com/Pranavchikte/cinescope-backend",
     demoUrl: "https://www.cinescopes.app/",
     detailUrl: "/projects/cinescope", // ADDED
   },
