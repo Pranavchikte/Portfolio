@@ -21,7 +21,7 @@ const featuredProjects = [
     problem: "It's hard to find info, new releases, and trending movies all in one place.",
     stack: ["Flask", "React", "TMDB API", "Celery", "Redis", "DigitalOcean"],
     githubUrl: "https://github.com/Pranavchikte/cinescope-api",
-    demoUrl: "https://cinescope-client.vercel.app/",
+    demoUrl: "https://www.cinescopes.app/",
     detailUrl: "/projects/cinescope", // ADDED
   },
 ]

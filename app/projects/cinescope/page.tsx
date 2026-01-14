@@ -42,7 +42,7 @@ export default function CineScopeProject() {
             <div className="flex gap-4 flex-wrap">
               <Button asChild className="btn-primary" size="lg">
                 <a 
-                  href="https://cinescope-client.vercel.app/" 
+                  href="https://www.cinescopes.app/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2"
@@ -323,7 +323,7 @@ export default function CineScopeProject() {
             <div className="flex gap-4 justify-center flex-wrap">
               <Button asChild className="btn-primary" size="lg">
                 <a 
-                  href="https://cinescope-client.vercel.app/" 
+                  href="https://www.cinescopes.app/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2"
