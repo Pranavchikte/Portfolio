@@ -58,41 +58,37 @@ export function AboutSection() {
 
             <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
               <p>
-                I'm passionate about building <span className="text-foreground font-medium">AI models that ease automation</span> and 
-                reduce human intervention. For me, technology should make life easier—not more complicated.
+                I build <span className="text-foreground font-medium">backend systems that perform under real-world conditions</span>. 
+                Fast APIs, proper caching with Redis, async job processing with Celery—I focus on making applications that 
+                handle actual traffic without breaking.
               </p>
 
               <p>
-                I love building <span className="text-foreground font-medium">scalable backend systems</span> that are fast, 
-                reliable, and handle real-world traffic. Whether it's designing APIs, implementing caching with Redis, 
-                or managing async tasks with Celery—I focus on making applications that actually perform under pressure.
+                My projects aren't demos. <span className="text-foreground font-medium">Finsight AI processes natural language transactions 
+                using Gemini's API</span> and handles background tasks through Celery workers. 
+                <span className="text-foreground font-medium"> CineScope aggregates movie data from TMDB with Redis caching</span> to 
+                optimize response times. Both are deployed and running in production.
               </p>
 
               <p>
-                I don't build demo apps. <span className="text-foreground font-medium">I build products that people genuinely use</span>. 
-                From concept to deployment, I care about the entire lifecycle. My projects aren't just portfolio pieces—they're 
-                solutions to real problems that I've deployed and maintained in production.
+                I care about the full lifecycle—from architecting the solution to deploying on Railway or Vercel to monitoring 
+                performance. <span className="text-foreground font-medium">When I build something, it ships and it works.</span>
               </p>
 
               <p className="text-foreground font-semibold">
-                Currently, I'm seeking a backend or full-stack role where I can build production-grade systems 
-                and work with AI/ML pipelines to create impactful products.
+                Currently seeking a software engineering role where I can build scalable backend systems and work with AI/ML pipelines.
               </p>
             </div>
 
             {/* Quick stats */}
-            <div className="mt-8 grid grid-cols-3 gap-6">
+            <div className="mt-8 grid grid-cols-2 gap-6">
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-1">150+</div>
+                <div className="text-3xl font-bold text-primary mb-1">160+</div>
                 <div className="text-sm text-muted-foreground">LeetCode Problems</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-1">3+</div>
-                <div className="text-sm text-muted-foreground">Deployed Projects</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-1">2+</div>
-                <div className="text-sm text-muted-foreground">Years Experience</div>
+                <div className="text-3xl font-bold text-primary mb-1">2</div>
+                <div className="text-sm text-muted-foreground">Production Projects</div>
               </div>
             </div>
           </div>

@@ -1,29 +1,29 @@
-"use client"
+"use client";
 
-import { Header } from "@/components/header"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import Image from "next/image"
-import { 
-  IconBrandGithub, 
+import { Header } from "@/components/header";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import Image from "next/image";
+import {
+  IconBrandGithub,
   IconExternalLink,
   IconSearch,
   IconTrendingUp,
   IconMovie,
-  IconBolt
-} from "@tabler/icons-react"
+  IconBolt,
+} from "@tabler/icons-react";
 
 export default function CineScopeProject() {
   return (
     <main className="min-h-screen bg-background">
       <Header />
-      
+
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-8">
         <div className="max-w-6xl mx-auto">
           {/* Back button */}
-          <Link 
-            href="/#projects" 
+          <Link
+            href="/#projects"
             className="inline-flex items-center text-muted-foreground hover:text-primary mb-8 transition-colors"
           >
             ← Back to Projects
@@ -31,19 +31,18 @@ export default function CineScopeProject() {
 
           {/* Project title and links */}
           <div className="mb-8">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4">
-              CineScope
-            </h1>
+            <h1 className="text-5xl md:text-6xl font-bold mb-4">CineScope</h1>
             <p className="text-xl text-muted-foreground mb-6">
-              Your Gateway to Discovering Movies and Series—Trending, Latest Releases, and Everything Cinema
+              Your Gateway to Discovering Movies and Series—Trending, Latest
+              Releases, and Everything Cinema
             </p>
-            
+
             {/* Action buttons */}
             <div className="flex gap-4 flex-wrap">
               <Button asChild className="btn-primary" size="lg">
-                <a 
-                  href="https://www.cinescopes.app/" 
-                  target="_blank" 
+                <a
+                  href="https://www.cinescopes.app/"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2"
                 >
@@ -52,9 +51,9 @@ export default function CineScopeProject() {
                 </a>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <a 
-                  href="https://github.com/Pranavchikte/cinescope-backend" 
-                  target="_blank" 
+                <a
+                  href="https://github.com/Pranavchikte/cinescope-backend"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2"
                 >
@@ -80,9 +79,11 @@ export default function CineScopeProject() {
           <div className="mb-16">
             <h2 className="text-3xl font-bold mb-4">The Problem</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Movie enthusiasts often struggle to find comprehensive information about films and series in one place. 
-              They have to jump between multiple platforms to discover trending content, check new releases, view cast 
-              details, and read plot summaries. There was a need for a unified platform that brings all essential movie 
+              Movie enthusiasts often struggle to find comprehensive information
+              about films and series in one place. They have to jump between
+              multiple platforms to discover trending content, check new
+              releases, view cast details, and read plot summaries. There was a
+              need for a unified platform that brings all essential movie
               information together with a fast, user-friendly experience.
             </p>
           </div>
@@ -91,9 +92,11 @@ export default function CineScopeProject() {
           <div className="mb-16">
             <h2 className="text-3xl font-bold mb-6">The Solution</h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              CineScope is a modern movie discovery platform that aggregates data from The Movie Database (TMDB) API 
-              to provide cinema lovers with everything they need—trending movies, latest releases, detailed cast information, 
-              plot summaries, and ratings—all in one clean interface. Built for speed and simplicity, it's like IMDb 
+              CineScope is a modern movie discovery platform that aggregates
+              data from The Movie Database (TMDB) API to provide cinema lovers
+              with everything they need—trending movies, latest releases,
+              detailed cast information, plot summaries, and ratings—all in one
+              clean interface. Built for speed and simplicity, it's like IMDb
               reimagined for the modern web.
             </p>
 
@@ -105,7 +108,8 @@ export default function CineScopeProject() {
                   <h3 className="text-xl font-semibold">Smart Movie Search</h3>
                 </div>
                 <p className="text-muted-foreground">
-                  Instantly search and discover movies by title, genre, or keywords with lightning-fast results.
+                  Instantly search and discover movies by title, genre, or
+                  keywords with lightning-fast results.
                 </p>
               </div>
 
@@ -115,7 +119,8 @@ export default function CineScopeProject() {
                   <h3 className="text-xl font-semibold">Trending Content</h3>
                 </div>
                 <p className="text-muted-foreground">
-                  Stay updated with the latest trending movies and series, refreshed daily to show what's popular.
+                  Stay updated with the latest trending movies and series,
+                  refreshed daily to show what's popular.
                 </p>
               </div>
 
@@ -125,17 +130,21 @@ export default function CineScopeProject() {
                   <h3 className="text-xl font-semibold">Detailed Movie Info</h3>
                 </div>
                 <p className="text-muted-foreground">
-                  Access comprehensive details including plot summaries, cast information, ratings, and release dates.
+                  Access comprehensive details including plot summaries, cast
+                  information, ratings, and release dates.
                 </p>
               </div>
 
               <div className="bg-neutral-900 border border-neutral-800 p-6 rounded-lg">
                 <div className="flex items-center gap-3 mb-3">
                   <IconBolt className="w-6 h-6 text-cyan-400" />
-                  <h3 className="text-xl font-semibold">Lightning Fast Performance</h3>
+                  <h3 className="text-xl font-semibold">
+                    Lightning Fast Performance
+                  </h3>
                 </div>
                 <p className="text-muted-foreground">
-                  Smart caching with Redis ensures repeated queries load instantly without hitting API rate limits.
+                  Smart caching with Redis ensures repeated queries load
+                  instantly without hitting API rate limits.
                 </p>
               </div>
             </div>
@@ -145,8 +154,16 @@ export default function CineScopeProject() {
           <div className="mb-16">
             <h2 className="text-3xl font-bold mb-6">Tech Stack</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-              {["Flask", "React", "TMDB API", "Celery", "Redis", "DigitalOcean", "Vercel"].map((tech) => (
-                <div 
+              {[
+                "FastAPI",
+                "PostgreSQL",
+                "Redis",
+                "Next.js",
+                "TMDB API",
+                "Docker",
+                "DigitalOcean",
+              ].map((tech) => (
+                <div
                   key={tech}
                   className="bg-neutral-900 border border-neutral-800 px-4 py-3 rounded-lg text-center font-medium"
                 >
@@ -163,14 +180,14 @@ export default function CineScopeProject() {
               <div className="space-y-4 text-muted-foreground">
                 <div className="flex items-center gap-4">
                   <div className="bg-cyan-500/20 text-cyan-400 px-4 py-2 rounded-md font-mono text-sm">
-                    React Frontend
+                    Next.js Frontend
                   </div>
                   <span>→</span>
                   <div className="bg-cyan-500/20 text-cyan-400 px-4 py-2 rounded-md font-mono text-sm">
-                    Flask REST API
+                    FastAPI Backend
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-4 pl-8">
                   <span>↓</span>
                 </div>
@@ -188,11 +205,7 @@ export default function CineScopeProject() {
 
                 <div className="flex items-center gap-4 pl-8">
                   <div className="bg-cyan-500/20 text-cyan-400 px-4 py-2 rounded-md font-mono text-sm">
-                    Celery Task Queue
-                  </div>
-                  <span>→</span>
-                  <div className="bg-cyan-500/20 text-cyan-400 px-4 py-2 rounded-md font-mono text-sm">
-                    TMDB API
+                    Fetch from TMDB API
                   </div>
                 </div>
 
@@ -202,7 +215,7 @@ export default function CineScopeProject() {
 
                 <div className="flex items-center gap-4 pl-8">
                   <div className="bg-cyan-500/20 text-cyan-400 px-4 py-2 rounded-md font-mono text-sm">
-                    Store in Redis Cache
+                    Store in Redis + PostgreSQL
                   </div>
                 </div>
 
@@ -218,16 +231,17 @@ export default function CineScopeProject() {
               </div>
 
               <div className="mt-6 pt-6 border-t border-neutral-800">
-                <p className="text-sm text-muted-foreground mb-2">
-                  <span className="font-semibold text-foreground">Cache Strategy:</span> Popular movies cached for 24 hours, reducing API calls by 80%
-                </p>
                 <p className="text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">Deployment:</span> Backend hosted on DigitalOcean | Frontend deployed on Vercel
+                  <span className="font-semibold text-foreground">
+                    Deployment:
+                  </span>{" "}
+                  Backend hosted on DigitalOcean | Frontend deployed on Vercel
                 </p>
               </div>
             </div>
           </div>
 
+          {/* My Role */}
           {/* My Role */}
           <div className="mb-16">
             <h2 className="text-3xl font-bold mb-6">My Role & Contributions</h2>
@@ -235,23 +249,54 @@ export default function CineScopeProject() {
               <ul className="space-y-4 text-lg text-muted-foreground">
                 <li className="flex items-start gap-3">
                   <span className="text-cyan-400 mt-1">•</span>
-                  <span>Designed and built the entire <span className="text-foreground font-medium">Flask REST API backend</span> from scratch</span>
+                  <span>
+                    Designed and built the entire{" "}
+                    <span className="text-foreground font-medium">
+                      FastAPI REST API backend
+                    </span>{" "}
+                    from scratch
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-cyan-400 mt-1">•</span>
-                  <span>Integrated <span className="text-foreground font-medium">TMDB API</span> for fetching movie data, trending lists, and cast information</span>
+                  <span>
+                    Integrated{" "}
+                    <span className="text-foreground font-medium">
+                      TMDB API
+                    </span>{" "}
+                    for fetching movie data, trending lists, and cast
+                    information
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-cyan-400 mt-1">•</span>
-                  <span>Implemented <span className="text-foreground font-medium">Redis caching strategy</span> to temporarily store frequently accessed movie data in memory</span>
+                  <span>
+                    Implemented{" "}
+                    <span className="text-foreground font-medium">
+                      Redis caching layer
+                    </span>{" "}
+                    to reduce redundant API calls and improve response times
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-cyan-400 mt-1">•</span>
-                  <span>Set up <span className="text-foreground font-medium">Celery task queue</span> for asynchronous API calls to prevent blocking requests</span>
+                  <span>
+                    Set up{" "}
+                    <span className="text-foreground font-medium">
+                      PostgreSQL database
+                    </span>{" "}
+                    with SQLAlchemy ORM for user data and watchlist management
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-cyan-400 mt-1">•</span>
-                  <span>Deployed backend to <span className="text-foreground font-medium">DigitalOcean</span> and managed production environment configuration</span>
+                  <span>
+                    Deployed backend to{" "}
+                    <span className="text-foreground font-medium">
+                      DigitalOcean
+                    </span>{" "}
+                    with Docker containerization
+                  </span>
                 </li>
               </ul>
             </div>
@@ -259,30 +304,50 @@ export default function CineScopeProject() {
 
           {/* Technical Challenge */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6">Technical Challenge Solved</h2>
+            <h2 className="text-3xl font-bold mb-6">
+              Technical Challenge Solved
+            </h2>
             <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 p-8 rounded-lg">
-              <h3 className="text-xl font-semibold mb-4 text-cyan-400">Problem: TMDB API Rate Limits</h3>
+              <h3 className="text-xl font-semibold mb-4 text-cyan-400">
+                Challenge: TMDB API Rate Limits
+              </h3>
               <p className="text-lg text-muted-foreground mb-6">
-                The Movie Database (TMDB) API has strict rate limits that restrict the number of requests per second. 
-                When multiple users searched for the same popular movie (like "Avengers" or "Inception"), the application 
-                would hit rate limits and fail to return data. Additionally, every API call took 1-2 seconds, making 
-                repeated searches for the same content painfully slow.
+                The Movie Database (TMDB) API has rate limits that restrict
+                requests per second. When multiple users searched for popular
+                movies repeatedly, the application would make unnecessary API
+                calls for the same data, wasting quota and slowing down
+                responses.
               </p>
-              
-              <h3 className="text-xl font-semibold mb-4 text-cyan-400">Solution: Smart Caching with Redis & Celery</h3>
+
+              <h3 className="text-xl font-semibold mb-4 text-cyan-400">
+                Solution: Redis Caching Strategy
+              </h3>
               <p className="text-lg text-muted-foreground mb-4">
-                Implemented an intelligent caching layer using Redis to store frequently accessed movie data temporarily in memory:
+                Implemented a caching layer using Redis to store frequently
+                accessed movie data:
               </p>
               <ol className="list-decimal list-inside space-y-2 text-muted-foreground mb-4 pl-4">
-                <li>When a user searches for a movie, the system first checks if the data exists in Redis cache</li>
-                <li>If found (cache hit), data is returned instantly without making an API call</li>
-                <li>If not found (cache miss), Celery queues a background task to fetch from TMDB API</li>
-                <li>The fetched data is stored in Redis with a 24-hour expiration time</li>
-                <li>Popular movies remain cached, eliminating redundant API calls</li>
+                <li>
+                  When a user searches for a movie, the system checks Redis
+                  cache first
+                </li>
+                <li>
+                  If data exists (cache hit), it's returned immediately without
+                  calling TMDB API
+                </li>
+                <li>
+                  If not found (cache miss), fetch from TMDB API and store in
+                  Redis with TTL
+                </li>
+                <li>
+                  Popular movies remain cached, eliminating redundant API calls
+                </li>
+                <li>Cache expires after 24 hours to ensure data freshness</li>
               </ol>
-              
+
               <p className="text-lg font-semibold text-foreground">
-                Result: Reduced API calls by 80% for popular content and improved response time from 1-2 seconds to under 100ms for cached data.
+                Result: Significantly reduced API calls for popular content and
+                improved response times for cached data.
               </p>
             </div>
           </div>
@@ -292,23 +357,32 @@ export default function CineScopeProject() {
             <h2 className="text-3xl font-bold mb-6">Key Learnings</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-neutral-900 border border-neutral-800 p-6 rounded-lg">
-                <h3 className="text-lg font-semibold mb-3">Handling External APIs</h3>
+                <h3 className="text-lg font-semibold mb-3">
+                  Handling External APIs
+                </h3>
                 <p className="text-muted-foreground">
-                  Learned to work with third-party API rate limits, authentication, and error handling in production environments.
+                  Learned to work with third-party API rate limits,
+                  authentication, and error handling in production environments.
                 </p>
               </div>
 
               <div className="bg-neutral-900 border border-neutral-800 p-6 rounded-lg">
-                <h3 className="text-lg font-semibold mb-3">Redis & Celery Mastery</h3>
+                <h3 className="text-lg font-semibold mb-3">
+                  Redis & Celery Mastery
+                </h3>
                 <p className="text-muted-foreground">
-                  Gained hands-on experience implementing Redis for caching and Celery for async task processing to optimize performance.
+                  Gained hands-on experience implementing Redis for caching and
+                  Celery for async task processing to optimize performance.
                 </p>
               </div>
 
               <div className="bg-neutral-900 border border-neutral-800 p-6 rounded-lg">
-                <h3 className="text-lg font-semibold mb-3">Production Deployment</h3>
+                <h3 className="text-lg font-semibold mb-3">
+                  Production Deployment
+                </h3>
                 <p className="text-muted-foreground">
-                  Deployed and maintained a production Flask application on DigitalOcean with proper environment configuration.
+                  Deployed and maintained a production Flask application on
+                  DigitalOcean with proper environment configuration.
                 </p>
               </div>
             </div>
@@ -318,13 +392,14 @@ export default function CineScopeProject() {
           <div className="text-center py-12 border-t border-border">
             <h2 className="text-3xl font-bold mb-4">Explore CineScope</h2>
             <p className="text-lg text-muted-foreground mb-8">
-              The platform is live and ready to help you discover your next favorite movie.
+              The platform is live and ready to help you discover your next
+              favorite movie.
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
               <Button asChild className="btn-primary" size="lg">
-                <a 
-                  href="https://www.cinescopes.app/" 
-                  target="_blank" 
+                <a
+                  href="https://www.cinescopes.app/"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2"
                 >
@@ -333,9 +408,9 @@ export default function CineScopeProject() {
                 </a>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <a 
-                  href="https://github.com/Pranavchikte/cinescope-backend" 
-                  target="_blank" 
+                <a
+                  href="https://github.com/Pranavchikte/cinescope-backend"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2"
                 >
@@ -348,5 +423,5 @@ export default function CineScopeProject() {
         </div>
       </section>
     </main>
-  )
+  );
 }

@@ -1,6 +1,7 @@
 "use client"
 
 import React from "react"
+import { toast } from "sonner"
 import { Label } from "./ui/label"
 import { Input } from "./ui/input"
 import { Textarea } from "./ui/textarea"
@@ -14,8 +15,15 @@ import Link from "next/link"
 export function ContactSection() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // Form submission logic here (e.g., Formspree, Netlify Forms, or API endpoint)
-    console.log("Form submitted")
+    
+    // Show success toast
+    toast.success("Message sent successfully!", {
+      description: "Thank you for reaching out. I'll get back to you soon.",
+      duration: 4000,
+    })
+    
+    // Reset form
+    e.currentTarget.reset()
   }
 
   return (
@@ -62,7 +70,6 @@ export function ContactSection() {
 
           <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-700 to-transparent" />
 
-          {/* Updated Social Links with correct URLs */}
           <div className="flex flex-col space-y-4">
             <Link
               href="https://github.com/Pranavchikte"

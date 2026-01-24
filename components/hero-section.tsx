@@ -8,7 +8,7 @@ import Link from "next/link"
 export function HeroSection() {
   return (
     <section
-      id="home" // CHANGED from "about" to "home"
+      id="home"
       className="relative flex min-h-screen w-full items-center justify-center overflow-hidden px-8"
     >
       <BackgroundRippleEffect />
@@ -18,14 +18,15 @@ export function HeroSection() {
         </div>
 
         <h2 className="text-2xl font-semibold text-primary mb-8 md:text-3xl">
-          Backend Developer & AI Engineer
+          Software Engineer — Backend Focus
         </h2>
 
         <p className="text-lg text-muted-foreground max-w-4xl mx-auto leading-relaxed text-pretty md:text-xl">
-          Final-year AI & Data Science student building production-ready backend systems with Python, Flask, and FastAPI. 
-          I specialize in <span className="text-foreground font-medium">scalable APIs, async task processing with Celery</span>, 
-          and <span className="text-foreground font-medium">AI-powered applications using LangChain and RAG</span>. 
-          From architecting the solution to deploying on Railway or Vercel—I ship complete products that solve real problems.
+          I build production-ready backend systems that handle real traffic. 
+          Specialized in <span className="text-foreground font-medium">scalable REST APIs with FastAPI and Flask</span>, 
+          <span className="text-foreground font-medium"> async task processing using Celery + Redis</span>, 
+          and <span className="text-foreground font-medium">AI integrations with LangChain and Gemini</span>. 
+          I ship complete products—from system design to deployment on Digital Ocean and Vercel—that solve actual problems.
         </p>
 
         <div className="mt-10 flex justify-center gap-4 flex-wrap">
