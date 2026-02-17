@@ -3,15 +3,18 @@
 import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect"
 import { TextHoverEffect } from "@/components/ui/text-hover-effect"
 import { Button } from "@/components/ui/button"
+import { useAnimationSettings } from "@/hooks/use-animation-settings"
 import Link from "next/link"
 
 export function HeroSection() {
+  const { disableAnimations } = useAnimationSettings()
+
   return (
     <section
       id="home"
       className="relative flex min-h-screen w-full items-center justify-center overflow-hidden px-8"
     >
-      <BackgroundRippleEffect />
+      {!disableAnimations && <BackgroundRippleEffect />}
       <div className="relative z-10 mx-auto max-w-5xl text-center">
         <div className="text-6xl font-bold text-balance mb-4 md:text-8xl">
           <TextHoverEffect text="Pranav" />

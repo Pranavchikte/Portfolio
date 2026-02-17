@@ -4,6 +4,7 @@ import { useMotionValue, motion, useMotionTemplate } from "motion/react";
 import React, { MouseEvent as ReactMouseEvent, useState } from "react";
 import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect";
 import { cn } from "@/lib/utils";
+import { useAnimationSettings } from "@/hooks/use-animation-settings";
 
 export const CardSpotlight = ({
   children,
@@ -16,6 +17,7 @@ export const CardSpotlight = ({
   color?: string;
   children: React.ReactNode;
 } & React.HTMLAttributes<HTMLDivElement>) => {
+  const { disableHeavyAnimations } = useAnimationSettings();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   function handleMouseMove({
@@ -56,7 +58,7 @@ export const CardSpotlight = ({
           `,
         }}
       >
-        {isHovering && (
+        {isHovering && !disableHeavyAnimations && (
           <CanvasRevealEffect
             animationSpeed={5}
             containerClassName="bg-transparent absolute inset-0 pointer-events-none"

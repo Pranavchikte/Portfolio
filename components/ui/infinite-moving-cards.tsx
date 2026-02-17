@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
+import { useAnimationSettings } from "@/hooks/use-animation-settings";
 
 export const InfiniteMovingCards = ({
   items,
@@ -20,12 +21,15 @@ export const InfiniteMovingCards = ({
   pauseOnHover?: boolean;
   className?: string;
 }) => {
+  const { disableAnimations } = useAnimationSettings();
   const containerRef = React.useRef<HTMLDivElement>(null);
   const scrollerRef = React.useRef<HTMLUListElement>(null);
 
   useEffect(() => {
-    addAnimation();
-  }, []);
+    if (!disableAnimations) {
+      addAnimation();
+    }
+  }, [disableAnimations]);
   const [start, setStart] = useState(false);
   function addAnimation() {
     if (containerRef.current && scrollerRef.current) {
@@ -69,6 +73,41 @@ export const InfiniteMovingCards = ({
       }
     }
   };
+
+  if (disableAnimations) {
+    return (
+      <div
+        className={cn(
+          "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto px-4",
+          className,
+        )}
+      >
+        {items.map((item, idx) => (
+          <div
+            className="relative w-full rounded-2xl border border-zinc-200 bg-[linear-gradient(180deg,#fafafa,#f5f5f5)] px-8 py-6 dark:border-zinc-700 dark:bg-[linear-gradient(180deg,#27272a,#18181b)]"
+            key={idx}
+          >
+            <blockquote>
+              <span className="relative z-20 text-sm leading-[1.6] font-normal text-neutral-800 dark:text-gray-100">
+                {item.quote}
+              </span>
+              <div className="relative z-20 mt-6 flex flex-row items-center">
+                <span className="flex flex-col gap-1">
+                  <span className="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                    {item.name}
+                  </span>
+                  <span className="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                    {item.title}
+                  </span>
+                </span>
+              </div>
+            </blockquote>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div
       ref={containerRef}

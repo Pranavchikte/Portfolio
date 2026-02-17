@@ -1,6 +1,7 @@
 "use client"
 import React, { useRef, useEffect, useState } from "react"
 import { motion } from "motion/react"
+import { useAnimationSettings } from "@/hooks/use-animation-settings"
 
 export const TextHoverEffect = ({
   text,
@@ -10,6 +11,7 @@ export const TextHoverEffect = ({
   duration?: number
   automatic?: boolean
 }) => {
+  const { disableAnimations } = useAnimationSettings()
   const svgRef = useRef<SVGSVGElement>(null)
   const [cursor, setCursor] = useState({ x: 0, y: 0 })
   const [hovered, setHovered] = useState(false)
@@ -26,6 +28,14 @@ export const TextHoverEffect = ({
       })
     }
   }, [cursor])
+
+  if (disableAnimations) {
+    return (
+      <span className="text-7xl font-bold font-[helvetica]">
+        {text}
+      </span>
+    )
+  }
 
   return (
     <svg
