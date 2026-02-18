@@ -1,35 +1,16 @@
 "use client"
 
-import { useEffect, useRef } from "react"
 import Image from "next/image"
+import { useInView } from "@/hooks/use-in-view"
 
 export function AboutSection() {
-  const sectionRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in-view")
-          }
-        })
-      },
-      { threshold: 0.1 }
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
+  const sectionRef = useInView()
 
   return (
     <section
       id="about"
       ref={sectionRef}
-      className="py-20 px-8 animate-on-scroll"
+      className="py-24 px-4 md:px-8 animate-on-scroll scroll-mt-16"
     >
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -45,50 +26,57 @@ export function AboutSection() {
                   priority
                 />
               </div>
-              {/* Decorative gradient background */}
               <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-2xl -z-10 blur-2xl" />
             </div>
           </div>
 
           {/* Right side: Story */}
           <div className="order-1 lg:order-2">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              About Me
-            </h2>
+            <div className="text-center mb-8">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                About Me
+              </h2>
+            </div>
 
             <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
               <p>
-                I build <span className="text-foreground font-medium">backend systems that perform under real-world conditions</span>. 
-                Fast APIs, proper caching with Redis, async job processing with Celery—I focus on making applications that 
-                handle actual traffic without breaking.
+                I've built and shipped{" "}
+                <span className="text-foreground font-medium">2 production AI products solo</span> —
+                full stack, from architecture to deployment. Not side projects. Live apps with
+                real users, real infrastructure, and real performance requirements.
               </p>
 
               <p>
-                My projects aren't demos. <span className="text-foreground font-medium">Finsight AI processes natural language transactions 
-                using Gemini's API</span> and handles background tasks through Celery workers. 
-                <span className="text-foreground font-medium"> CineScope aggregates movie data from TMDB with Redis caching</span> to 
-                optimize response times. Both are deployed and running in production.
+                At Finsight AI, I engineered an async pipeline using{" "}
+                <span className="text-foreground font-medium">Celery + Redis to offload Gemini API calls</span>,
+                hitting 85–417ms response times in production. The Next.js frontend scored{" "}
+                <span className="text-foreground font-medium">95+ on Lighthouse</span>.
+                At CineScope, I integrated{" "}
+                <span className="text-foreground font-medium">Gemini Pro for a conversational movie recommendation engine</span>{" "}
+                with in-memory vector embeddings and JWT refresh token rotation in Redis.
               </p>
 
               <p>
-                I care about the full lifecycle—from architecting the solution to deploying on Railway or Vercel to monitoring 
-                performance. <span className="text-foreground font-medium">When I build something, it ships and it works.</span>
+                I care about the full lifecycle — system design, clean service layers,
+                Swagger-documented APIs, Pytest coverage, and CI/CD on DigitalOcean and Vercel.{" "}
+                <span className="text-foreground font-medium">When I build something, it ships and it works.</span>
               </p>
 
               <p className="text-foreground font-semibold">
-                Currently seeking a software engineering role where I can build scalable backend systems and work with AI/ML pipelines.
+                Graduating May 2026, available immediately. Looking for an early-stage team
+                where I can own backend systems and move fast.
               </p>
             </div>
 
             {/* Quick stats */}
             <div className="mt-8 grid grid-cols-2 gap-6">
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-1">160+</div>
-                <div className="text-sm text-muted-foreground">LeetCode Problems</div>
+                <div className="text-3xl font-bold text-cyan-400 mb-1">85ms</div>
+                <div className="text-sm text-muted-foreground">Avg API Response (prod)</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-1">2</div>
-                <div className="text-sm text-muted-foreground">Production Projects</div>
+                <div className="text-3xl font-bold text-cyan-400 mb-1">95+</div>
+                <div className="text-sm text-muted-foreground">Lighthouse Score</div>
               </div>
             </div>
           </div>

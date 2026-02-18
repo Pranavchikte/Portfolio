@@ -9,22 +9,16 @@ import {
   IconCode,
 } from "@tabler/icons-react"
 
-// Your skills data remains the same
 const skillsData = [
   {
-    category: "AI / Machine Learning",
+    category: "AI / ML",
     icon: <IconCpu className="h-6 w-6" />,
     skills: [
-      "Generative AI",
-      "LangChain",
-      "LangGraph",
-      "RAG",
-      "LLM Deployment",
-      "OpenAI API",
-      "Embeddings",
+      "Google Gemini API (2.5-flash, Pro)",
+      "LLM Integration",
+      "Async AI Processing",
       "Prompt Engineering",
-      "AI Agents",
-      "Agentic Workflows",
+      "Vector Embeddings",
       "Machine Learning",
       "Scikit-learn",
       "Pandas",
@@ -40,9 +34,12 @@ const skillsData = [
       "Flask",
       "Celery",
       "Redis",
-      "MongoDB",
       "PostgreSQL",
-      "API Integration",
+      "MongoDB",
+      "SQLAlchemy 2.0",
+      "JWT (PyJWT)",
+      "REST APIs",
+      "Swagger / OpenAPI",
     ],
   },
   {
@@ -50,26 +47,28 @@ const skillsData = [
     icon: <IconTool className="h-6 w-6" />,
     skills: [
       "Docker",
+      "Docker Compose",
+      "CI/CD",
+      "DigitalOcean",
+      "Vercel",
       "Git",
       "GitHub",
-      "Vercel",
-      "Render",
-      "Railway",
+      "Pytest",
     ],
   },
   {
     category: "Frontend",
     icon: <IconCode className="h-6 w-6" />,
     skills: [
+      "TypeScript",
       "JavaScript",
-      "React", 
       "Next.js",
+      "React",
       "Tailwind CSS",
     ],
   },
 ]
 
-// New component using CardSpotlight for each skill category
 const SkillCard = ({
   title,
   icon,
@@ -81,13 +80,10 @@ const SkillCard = ({
 }) => (
   <CardSpotlight className="h-full w-full">
     <div className="relative z-20 h-full flex flex-col">
-      {/* Header with icon and title */}
       <div className="flex items-center gap-3 mb-4">
         <span className="text-cyan-400">{icon}</span>
         <h3 className="text-xl font-semibold text-white">{title}</h3>
       </div>
-      
-      {/* Skills list with checkmarks */}
       <ul className="list-none space-y-2 flex-grow">
         {skills.map((skill) => (
           <li key={skill} className="flex gap-2 items-start">
@@ -100,7 +96,6 @@ const SkillCard = ({
   </CardSpotlight>
 )
 
-// Checkmark icon component
 const CheckIcon = () => {
   return (
     <svg
@@ -123,8 +118,8 @@ const CheckIcon = () => {
 
 export function SkillsSection() {
   return (
-    <section id="skills" className="py-20 px-8">
-      <div className="max-w-7xl mx-auto">
+    <section id="skills" className="py-24 px-4 md:px-8 scroll-mt-16">
+      <div className="max-w-6xl mx-auto">
         <div className="mb-16 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Technical Skills</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -132,35 +127,15 @@ export function SkillsSection() {
           </p>
         </div>
 
-        {/* Grid layout with CardSpotlight - 2 columns on large screens */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* AI/ML takes full left column */}
-          <div className="lg:col-span-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {skillsData.map((category) => (
             <SkillCard
-              title={skillsData[0].category}
-              icon={skillsData[0].icon}
-              skills={skillsData[0].skills}
+              key={category.category}
+              title={category.category}
+              icon={category.icon}
+              skills={category.skills}
             />
-          </div>
-
-          {/* Other skills stacked on right column */}
-          <div className="lg:col-span-1 flex flex-col gap-8">
-            <SkillCard
-              title={skillsData[1].category}
-              icon={skillsData[1].icon}
-              skills={skillsData[1].skills}
-            />
-            <SkillCard
-              title={skillsData[2].category}
-              icon={skillsData[2].icon}
-              skills={skillsData[2].skills}
-            />
-            <SkillCard
-              title={skillsData[3].category}
-              icon={skillsData[3].icon}
-              skills={skillsData[3].skills}
-            />
-          </div>
+          ))}
         </div>
       </div>
     </section>

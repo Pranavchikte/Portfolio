@@ -8,20 +8,99 @@ import {
   IconBrandGithub,
   IconExternalLink,
   IconSearch,
-  IconTrendingUp,
-  IconMovie,
+  IconDatabase,
+  IconServer,
   IconBolt,
 } from "@tabler/icons-react";
+
+const techStack = [
+  "FastAPI",
+  "PostgreSQL",
+  "Redis",
+  "SQLAlchemy 2.0",
+  "Gemini Pro",
+  "Digital Ocean",
+  "Docker Compose",
+  "Next.js",
+  "Alembic",
+  "PyJWT",
+];
+
+const stats = [
+  { value: "FastAPI", label: "Versioned REST API" },
+  { value: "Gemini Pro", label: "AI Recommendations" },
+  { value: "sub-ms", label: "Cached Response Time" },
+  { value: "Docker", label: "Containerized Stack" },
+];
+
+const features = [
+  {
+    icon: <IconSearch className="w-6 h-6 text-cyan-400" />,
+    title: "Conversational Recommendation Engine",
+    description:
+      "Gemini Pro powers a conversational movie recommendation engine with in-memory vector embeddings for semantic search across the entire catalog.",
+  },
+  {
+    icon: <IconBolt className="w-6 h-6 text-cyan-400" />,
+    title: "Redis Caching",
+    description:
+      "Redis caching layer reduces redundant TMDB API calls, cutting repeated external request overhead and delivering sub-millisecond responses for cached queries.",
+  },
+  {
+    icon: <IconDatabase className="w-6 h-6 text-cyan-400" />,
+    title: "PostgreSQL + Alembic",
+    description:
+      "Relational data modelled with SQLAlchemy 2.0 and managed via Alembic migrations — clean, versioned schema evolution from day one.",
+  },
+  {
+    icon: <IconServer className="w-6 h-6 text-cyan-400" />,
+    title: "JWT Refresh Token Rotation",
+    description:
+      "Refresh token rotation stored in Redis enables seamless session management without long-lived access tokens — no stale sessions.",
+  },
+];
+
+const contributions = [
+  {
+    bold: "Designed a RESTful backend with FastAPI and SQLAlchemy 2.0",
+    rest: "using versioned API routes, clean service layers, and Alembic-managed PostgreSQL migrations.",
+  },
+  {
+    bold: "Integrated Google Gemini Pro",
+    rest: "to power a conversational movie recommendation engine with in-memory vector embeddings for semantic search across the catalog.",
+  },
+  {
+    bold: "Reduced redundant TMDB API calls via Redis caching",
+    rest: "— cutting repeated external request overhead and delivering sub-millisecond responses for cached queries.",
+  },
+  {
+    bold: "Secured the platform with JWT refresh token rotation in Redis",
+    rest: "enabling seamless session management without long-lived access tokens.",
+  },
+  {
+    bold: "Containerized the full stack with Digital Ocean and Docker Compose",
+    rest: "for reproducible local development and consistent production deployments.",
+  },
+];
+
+const architectureSteps = [
+  "Next.js Frontend",
+  "FastAPI Backend (versioned routes, Swagger/OpenAPI docs)",
+  "Redis Cache — check first (sub-ms for cache hits)",
+  "TMDB API — fetch on cache miss, store result in Redis",
+  "Gemini Pro — conversational recommendations via vector embeddings",
+  "PostgreSQL + SQLAlchemy 2.0 + Alembic (users, watchlists, ratings)",
+];
 
 export default function CineScopeProject() {
   return (
     <main className="min-h-screen bg-background">
       <Header />
 
-      {/* Hero Section */}
       <section className="pt-32 pb-16 px-8">
         <div className="max-w-6xl mx-auto">
-          {/* Back button */}
+
+          {/* Back */}
           <Link
             href="/#projects"
             className="inline-flex items-center text-muted-foreground hover:text-primary mb-8 transition-colors"
@@ -29,15 +108,14 @@ export default function CineScopeProject() {
             ← Back to Projects
           </Link>
 
-          {/* Project title and links */}
+          {/* Title + Links */}
           <div className="mb-8">
             <h1 className="text-5xl md:text-6xl font-bold mb-4">CineScope</h1>
             <p className="text-xl text-muted-foreground mb-6">
-              Your Gateway to Discovering Movies and Series—Trending, Latest
-              Releases, and Everything Cinema
+              Full-stack movie platform — Gemini Pro recommendation engine, Redis caching,
+              JWT refresh token rotation, and a versioned FastAPI backend with Alembic-managed
+              PostgreSQL migrations.
             </p>
-
-            {/* Action buttons */}
             <div className="flex gap-4 flex-wrap">
               <Button asChild className="btn-primary" size="lg">
                 <a
@@ -58,13 +136,24 @@ export default function CineScopeProject() {
                   className="inline-flex items-center gap-2"
                 >
                   <IconBrandGithub className="w-5 h-5" />
-                  View Code
+                  Backend
+                </a>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <a
+                  href="https://github.com/Pranavchikte/cinescope-frontend"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2"
+                >
+                  <IconBrandGithub className="w-5 h-5" />
+                  Frontend
                 </a>
               </Button>
             </div>
           </div>
 
-          {/* Project image */}
+          {/* Hero Image */}
           <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-border shadow-2xl mb-16">
             <Image
               src="/m1.png"
@@ -75,94 +164,61 @@ export default function CineScopeProject() {
             />
           </div>
 
-          {/* Problem Statement */}
+          {/* Stats */}
+          <div className="mb-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+            {stats.map((stat) => (
+              <div
+                key={stat.label}
+                className="bg-neutral-900 border border-neutral-800 rounded-lg p-4 text-center"
+              >
+                <div className="text-2xl font-bold text-cyan-400 mb-1">{stat.value}</div>
+                <div className="text-sm text-muted-foreground">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Problem */}
           <div className="mb-16">
             <h2 className="text-3xl font-bold mb-4">The Problem</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Movie enthusiasts often struggle to find comprehensive information
-              about films and series in one place. They have to jump between
-              multiple platforms to discover trending content, check new
-              releases, view cast details, and read plot summaries. There was a
-              need for a unified platform that brings all essential movie
-              information together with a fast, user-friendly experience.
+              Movie discovery is fragmented — users jump between platforms to find trending
+              content, read reviews, manage watchlists, and get recommendations. Existing
+              solutions either lack personalization or rely on basic keyword search with no
+              semantic understanding of what a user actually wants to watch.
             </p>
           </div>
 
-          {/* Solution */}
+          {/* Solution + Features */}
           <div className="mb-16">
             <h2 className="text-3xl font-bold mb-6">The Solution</h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              CineScope is a modern movie discovery platform that aggregates
-              data from The Movie Database (TMDB) API to provide cinema lovers
-              with everything they need—trending movies, latest releases,
-              detailed cast information, plot summaries, and ratings—all in one
-              clean interface. Built for speed and simplicity, it's like IMDb
-              reimagined for the modern web.
+              CineScope unifies movie discovery in one platform — TMDB API powers the catalog,
+              Gemini Pro handles conversational recommendations via vector embeddings, Redis
+              caches repeated queries for sub-millisecond responses, and a clean FastAPI
+              backend with versioned routes and Alembic-managed schema keeps everything
+              production-ready.
             </p>
-
-            {/* Key Features */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-neutral-900 border border-neutral-800 p-6 rounded-lg">
-                <div className="flex items-center gap-3 mb-3">
-                  <IconSearch className="w-6 h-6 text-cyan-400" />
-                  <h3 className="text-xl font-semibold">Smart Movie Search</h3>
+              {features.map((feature) => (
+                <div
+                  key={feature.title}
+                  className="bg-neutral-900 border border-neutral-800 p-6 rounded-lg"
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    {feature.icon}
+                    <h3 className="text-xl font-semibold">{feature.title}</h3>
+                  </div>
+                  <p className="text-muted-foreground">{feature.description}</p>
                 </div>
-                <p className="text-muted-foreground">
-                  Instantly search and discover movies by title, genre, or
-                  keywords with lightning-fast results.
-                </p>
-              </div>
-
-              <div className="bg-neutral-900 border border-neutral-800 p-6 rounded-lg">
-                <div className="flex items-center gap-3 mb-3">
-                  <IconTrendingUp className="w-6 h-6 text-cyan-400" />
-                  <h3 className="text-xl font-semibold">Trending Content</h3>
-                </div>
-                <p className="text-muted-foreground">
-                  Stay updated with the latest trending movies and series,
-                  refreshed daily to show what's popular.
-                </p>
-              </div>
-
-              <div className="bg-neutral-900 border border-neutral-800 p-6 rounded-lg">
-                <div className="flex items-center gap-3 mb-3">
-                  <IconMovie className="w-6 h-6 text-cyan-400" />
-                  <h3 className="text-xl font-semibold">Detailed Movie Info</h3>
-                </div>
-                <p className="text-muted-foreground">
-                  Access comprehensive details including plot summaries, cast
-                  information, ratings, and release dates.
-                </p>
-              </div>
-
-              <div className="bg-neutral-900 border border-neutral-800 p-6 rounded-lg">
-                <div className="flex items-center gap-3 mb-3">
-                  <IconBolt className="w-6 h-6 text-cyan-400" />
-                  <h3 className="text-xl font-semibold">
-                    Lightning Fast Performance
-                  </h3>
-                </div>
-                <p className="text-muted-foreground">
-                  Smart caching with Redis ensures repeated queries load
-                  instantly without hitting API rate limits.
-                </p>
-              </div>
+              ))}
             </div>
           </div>
 
           {/* Tech Stack */}
           <div className="mb-16">
             <h2 className="text-3xl font-bold mb-6">Tech Stack</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-              {[
-                "FastAPI",
-                "PostgreSQL",
-                "Redis",
-                "Next.js",
-                "TMDB API",
-                "Docker",
-                "DigitalOcean",
-              ].map((tech) => (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+              {techStack.map((tech) => (
                 <div
                   key={tech}
                   className="bg-neutral-900 border border-neutral-800 px-4 py-3 rounded-lg text-center font-medium"
@@ -177,214 +233,70 @@ export default function CineScopeProject() {
           <div className="mb-16">
             <h2 className="text-3xl font-bold mb-6">System Architecture</h2>
             <div className="bg-neutral-900 border border-neutral-800 p-8 rounded-lg">
-              <div className="space-y-4 text-muted-foreground">
-                <div className="flex items-center gap-4">
-                  <div className="bg-cyan-500/20 text-cyan-400 px-4 py-2 rounded-md font-mono text-sm">
-                    Next.js Frontend
+              <div className="space-y-3">
+                {architectureSteps.map((step, i) => (
+                  <div key={step}>
+                    <div className="bg-cyan-500/20 text-cyan-400 px-4 py-2 rounded-md font-mono text-sm inline-block">
+                      {step}
+                    </div>
+                    {i < architectureSteps.length - 1 && (
+                      <div className="pl-4 text-muted-foreground mt-1">↓</div>
+                    )}
                   </div>
-                  <span>→</span>
-                  <div className="bg-cyan-500/20 text-cyan-400 px-4 py-2 rounded-md font-mono text-sm">
-                    FastAPI Backend
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 pl-8">
-                  <span>↓</span>
-                </div>
-
-                <div className="flex items-center gap-4 pl-8">
-                  <div className="bg-cyan-500/20 text-cyan-400 px-4 py-2 rounded-md font-mono text-sm">
-                    Check Redis Cache
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 pl-8">
-                  <span>↓</span>
-                  <span className="text-sm">(Cache Miss)</span>
-                </div>
-
-                <div className="flex items-center gap-4 pl-8">
-                  <div className="bg-cyan-500/20 text-cyan-400 px-4 py-2 rounded-md font-mono text-sm">
-                    Fetch from TMDB API
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 pl-8">
-                  <span>↓</span>
-                </div>
-
-                <div className="flex items-center gap-4 pl-8">
-                  <div className="bg-cyan-500/20 text-cyan-400 px-4 py-2 rounded-md font-mono text-sm">
-                    Store in Redis + PostgreSQL
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 pl-8">
-                  <span>↓</span>
-                </div>
-
-                <div className="flex items-center gap-4 pl-8">
-                  <div className="bg-cyan-500/20 text-cyan-400 px-4 py-2 rounded-md font-mono text-sm">
-                    Return to Frontend
-                  </div>
-                </div>
+                ))}
               </div>
-
               <div className="mt-6 pt-6 border-t border-neutral-800">
                 <p className="text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">
-                    Deployment:
-                  </span>{" "}
-                  Backend hosted on DigitalOcean | Frontend deployed on Vercel
+                  <span className="font-semibold text-foreground">Deployment:</span>{" "}
+                  Backend containerized with Digital Ocean + Docker Compose | Frontend on Vercel | Swagger UI at /docs
                 </p>
               </div>
             </div>
           </div>
 
-          {/* My Role */}
-          {/* My Role */}
+          {/* Contributions */}
           <div className="mb-16">
             <h2 className="text-3xl font-bold mb-6">My Role & Contributions</h2>
             <div className="bg-neutral-900 border border-neutral-800 p-8 rounded-lg">
               <ul className="space-y-4 text-lg text-muted-foreground">
-                <li className="flex items-start gap-3">
-                  <span className="text-cyan-400 mt-1">•</span>
-                  <span>
-                    Designed and built the entire{" "}
-                    <span className="text-foreground font-medium">
-                      FastAPI REST API backend
-                    </span>{" "}
-                    from scratch
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-cyan-400 mt-1">•</span>
-                  <span>
-                    Integrated{" "}
-                    <span className="text-foreground font-medium">
-                      TMDB API
-                    </span>{" "}
-                    for fetching movie data, trending lists, and cast
-                    information
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-cyan-400 mt-1">•</span>
-                  <span>
-                    Implemented{" "}
-                    <span className="text-foreground font-medium">
-                      Redis caching layer
-                    </span>{" "}
-                    to reduce redundant API calls and improve response times
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-cyan-400 mt-1">•</span>
-                  <span>
-                    Set up{" "}
-                    <span className="text-foreground font-medium">
-                      PostgreSQL database
-                    </span>{" "}
-                    with SQLAlchemy ORM for user data and watchlist management
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-cyan-400 mt-1">•</span>
-                  <span>
-                    Deployed backend to{" "}
-                    <span className="text-foreground font-medium">
-                      DigitalOcean
-                    </span>{" "}
-                    with Docker containerization
-                  </span>
-                </li>
+                {contributions.map((item) => (
+                  <li key={item.bold} className="flex items-start gap-3">
+                    <span className="text-cyan-400 mt-1">•</span>
+                    <span>
+                      <span className="text-foreground font-medium">{item.bold}</span>{" "}
+                      {item.rest}
+                    </span>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
 
           {/* Technical Challenge */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6">
-              Technical Challenge Solved
-            </h2>
+            <h2 className="text-3xl font-bold mb-6">Technical Challenge Solved</h2>
             <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 p-8 rounded-lg">
               <h3 className="text-xl font-semibold mb-4 text-cyan-400">
-                Challenge: TMDB API Rate Limits
+                Challenge: TMDB API Rate Limits + Redundant External Calls
               </h3>
               <p className="text-lg text-muted-foreground mb-6">
-                The Movie Database (TMDB) API has rate limits that restrict
-                requests per second. When multiple users searched for popular
-                movies repeatedly, the application would make unnecessary API
-                calls for the same data, wasting quota and slowing down
-                responses.
+                TMDB API enforces rate limits. Without caching, every search for a popular
+                movie hit the external API — wasting quota, adding latency, and creating a
+                hard ceiling on concurrent users.
               </p>
-
               <h3 className="text-xl font-semibold mb-4 text-cyan-400">
-                Solution: Redis Caching Strategy
+                Solution: Redis Caching Layer
               </h3>
-              <p className="text-lg text-muted-foreground mb-4">
-                Implemented a caching layer using Redis to store frequently
-                accessed movie data:
-              </p>
-              <ol className="list-decimal list-inside space-y-2 text-muted-foreground mb-4 pl-4">
-                <li>
-                  When a user searches for a movie, the system checks Redis
-                  cache first
-                </li>
-                <li>
-                  If data exists (cache hit), it's returned immediately without
-                  calling TMDB API
-                </li>
-                <li>
-                  If not found (cache miss), fetch from TMDB API and store in
-                  Redis with TTL
-                </li>
-                <li>
-                  Popular movies remain cached, eliminating redundant API calls
-                </li>
-                <li>Cache expires after 24 hours to ensure data freshness</li>
+              <ol className="list-decimal list-inside space-y-2 text-muted-foreground mb-6 pl-4">
+                <li>Every TMDB request checks Redis first</li>
+                <li>Cache hit — return immediately, sub-millisecond, no external call</li>
+                <li>Cache miss — fetch from TMDB, store result in Redis with TTL</li>
+                <li>Popular content stays cached, drastically reducing API quota usage</li>
               </ol>
-
               <p className="text-lg font-semibold text-foreground">
-                Result: Significantly reduced API calls for popular content and
-                improved response times for cached data.
+                Result: Sub-millisecond responses for cached queries. Redundant external
+                API calls eliminated for repeated content.
               </p>
-            </div>
-          </div>
-
-          {/* What I Learned */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6">Key Learnings</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-neutral-900 border border-neutral-800 p-6 rounded-lg">
-                <h3 className="text-lg font-semibold mb-3">
-                  Handling External APIs
-                </h3>
-                <p className="text-muted-foreground">
-                  Learned to work with third-party API rate limits,
-                  authentication, and error handling in production environments.
-                </p>
-              </div>
-
-              <div className="bg-neutral-900 border border-neutral-800 p-6 rounded-lg">
-                <h3 className="text-lg font-semibold mb-3">
-                  Redis & Celery Mastery
-                </h3>
-                <p className="text-muted-foreground">
-                  Gained hands-on experience implementing Redis for caching and
-                  Celery for async task processing to optimize performance.
-                </p>
-              </div>
-
-              <div className="bg-neutral-900 border border-neutral-800 p-6 rounded-lg">
-                <h3 className="text-lg font-semibold mb-3">
-                  Production Deployment
-                </h3>
-                <p className="text-muted-foreground">
-                  Deployed and maintained a production Flask application on
-                  DigitalOcean with proper environment configuration.
-                </p>
-              </div>
             </div>
           </div>
 
@@ -392,8 +304,7 @@ export default function CineScopeProject() {
           <div className="text-center py-12 border-t border-border">
             <h2 className="text-3xl font-bold mb-4">Explore CineScope</h2>
             <p className="text-lg text-muted-foreground mb-8">
-              The platform is live and ready to help you discover your next
-              favorite movie.
+              Live in production. Try the demo or read the source code.
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
               <Button asChild className="btn-primary" size="lg">
@@ -420,6 +331,7 @@ export default function CineScopeProject() {
               </Button>
             </div>
           </div>
+
         </div>
       </section>
     </main>

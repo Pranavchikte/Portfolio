@@ -31,7 +31,7 @@ export const TextHoverEffect = ({
 
   if (disableAnimations) {
     return (
-      <span className="text-7xl font-bold font-[helvetica]">
+      <span className="text-5xl md:text-7xl font-bold font-[helvetica]">
         {text}
       </span>
     )
