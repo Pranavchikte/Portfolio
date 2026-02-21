@@ -1,12 +1,14 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { IconMenu2, IconX } from "@tabler/icons-react";
+import Image from "next/image";
 import {
   motion,
   AnimatePresence,
   useScroll,
   useMotionValueEvent,
 } from "motion/react";
+import { useAnimationSettings } from "@/hooks/use-animation-settings";
 
 import React, { useRef, useState } from "react";
 
@@ -46,10 +48,10 @@ interface MobileNavMenuProps {
   children: React.ReactNode;
   className?: string;
   isOpen: boolean;
-  onClose: () => void;
 }
 
 export const Navbar = ({ children, className }: NavbarProps) => {
+  const { disableAnimations } = useAnimationSettings();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll({
     target: ref,
@@ -58,6 +60,10 @@ export const Navbar = ({ children, className }: NavbarProps) => {
   const [visible, setVisible] = useState<boolean>(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
+    if (disableAnimations) {
+      setVisible(false);
+      return;
+    }
     if (latest > 100) {
       setVisible(true);
     } else {
@@ -86,24 +92,21 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
   return (
     <motion.div
       animate={{
-        backdropFilter: visible ? "blur(10px)" : "none",
+        backdropFilter: visible ? "blur(12px)" : "none",
         boxShadow: visible
-          ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
+          ? "0 12px 36px -28px rgba(14, 165, 233, 0.35), 0 0 0 1px rgba(34, 42, 53, 0.1)"
           : "none",
-        width: visible ? "40%" : "100%",
-        y: visible ? 20 : 0,
+        width: visible ? "96%" : "100%",
+        y: visible ? 10 : 0,
       }}
       transition={{
         type: "spring",
-        stiffness: 200,
-        damping: 50,
-      }}
-      style={{
-        minWidth: "800px",
+        stiffness: 240,
+        damping: 34,
       }}
       className={cn(
         "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full bg-transparent px-4 py-2 lg:flex dark:bg-transparent",
-        visible && "bg-white/80 dark:bg-neutral-950/80",
+        visible && "bg-background/85",
         className,
       )}
     >
@@ -145,27 +148,42 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
 };
 
 export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
+  const { disableAnimations } = useAnimationSettings();
+
+  if (disableAnimations) {
+    return (
+      <div
+        className={cn(
+          "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-background px-3 py-2 border border-border rounded-2xl lg:hidden",
+          className,
+        )}
+      >
+        {children}
+      </div>
+    );
+  }
+
   return (
     <motion.div
       animate={{
         backdropFilter: visible ? "blur(10px)" : "none",
         boxShadow: visible
-          ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
+          ? "0 12px 36px -28px rgba(14, 165, 233, 0.35), 0 0 0 1px rgba(34, 42, 53, 0.1)"
           : "none",
-        width: visible ? "90%" : "100%",
-        paddingRight: visible ? "12px" : "0px",
-        paddingLeft: visible ? "12px" : "0px",
-        borderRadius: visible ? "4px" : "2rem",
-        y: visible ? 20 : 0,
+        width: visible ? "95%" : "100%",
+        paddingRight: visible ? "10px" : "0px",
+        paddingLeft: visible ? "10px" : "0px",
+        borderRadius: visible ? "0.9rem" : "2rem",
+        y: visible ? 10 : 0,
       }}
       transition={{
         type: "spring",
-        stiffness: 200,
-        damping: 50,
+        stiffness: 220,
+        damping: 36,
       }}
       className={cn(
         "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-0 py-2 lg:hidden",
-        visible && "bg-white/80 dark:bg-neutral-950/80",
+        visible && "bg-background/85",
         className,
       )}
     >
@@ -194,8 +212,23 @@ export const MobileNavMenu = ({
   children,
   className,
   isOpen,
-  onClose,
 }: MobileNavMenuProps) => {
+  const { disableAnimations } = useAnimationSettings();
+
+  if (disableAnimations) {
+    if (!isOpen) return null;
+    return (
+      <div
+        className={cn(
+          "absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-lg border border-border bg-card px-4 py-6 shadow-sm",
+          className,
+        )}
+      >
+        {children}
+      </div>
+    );
+  }
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -222,10 +255,19 @@ export const MobileNavToggle = ({
   isOpen: boolean;
   onClick: () => void;
 }) => {
-  return isOpen ? (
-    <IconX className="text-black dark:text-white" onClick={onClick} />
-  ) : (
-    <IconMenu2 className="text-black dark:text-white" onClick={onClick} />
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={isOpen ? "Close menu" : "Open menu"}
+      className="inline-flex items-center justify-center"
+    >
+      {isOpen ? (
+        <IconX className="text-black dark:text-white" />
+      ) : (
+        <IconMenu2 className="text-black dark:text-white" />
+      )}
+    </button>
   );
 };
 
@@ -235,7 +277,7 @@ export const NavbarLogo = () => {
       href="#"
       className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
     >
-      <img
+      <Image
         src="https://assets.aceternity.com/logo-dark.png"
         alt="logo"
         width={30}
@@ -243,45 +285,5 @@ export const NavbarLogo = () => {
       />
       <span className="font-medium text-black dark:text-white">Startup</span>
     </a>
-  );
-};
-
-export const NavbarButton = ({
-  href,
-  as: Tag = "a",
-  children,
-  className,
-  variant = "primary",
-  ...props
-}: {
-  href?: string;
-  as?: React.ElementType;
-  children: React.ReactNode;
-  className?: string;
-  variant?: "primary" | "secondary" | "dark" | "gradient";
-} & (
-  | React.ComponentPropsWithoutRef<"a">
-  | React.ComponentPropsWithoutRef<"button">
-)) => {
-  const baseStyles =
-    "px-4 py-2 rounded-md bg-white button bg-white text-black text-sm font-bold relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center";
-
-  const variantStyles = {
-    primary:
-      "shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]",
-    secondary: "bg-transparent shadow-none dark:text-white",
-    dark: "bg-black text-white shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]",
-    gradient:
-      "bg-gradient-to-b from-blue-500 to-blue-700 text-white shadow-[0px_2px_0px_0px_rgba(255,255,255,0.3)_inset]",
-  };
-
-  return (
-    <Tag
-      href={href || undefined}
-      className={cn(baseStyles, variantStyles[variant], className)}
-      {...props}
-    >
-      {children}
-    </Tag>
   );
 };

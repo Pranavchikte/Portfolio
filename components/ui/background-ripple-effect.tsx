@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useAnimationSettings } from "@/hooks/use-animation-settings";
 
@@ -18,7 +18,6 @@ export const BackgroundRippleEffect = ({
     col: number;
   } | null>(null);
   const [rippleKey, setRippleKey] = useState(0);
-  const ref = useRef<any>(null);
 
   if (disableAnimations) {
     return (
@@ -33,7 +32,6 @@ export const BackgroundRippleEffect = ({
 
   return (
     <div
-      ref={ref}
       className={cn(
         "absolute inset-0 h-full w-full",
         "[--cell-border-color:var(--color-neutral-300)] [--cell-fill-color:var(--color-neutral-100)] [--cell-shadow-color:var(--color-neutral-500)]",

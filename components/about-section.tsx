@@ -10,10 +10,10 @@ export function AboutSection() {
     <section
       id="about"
       ref={sectionRef}
-      className="py-24 px-4 md:px-8 animate-on-scroll scroll-mt-16"
+      className="section-shell animate-on-scroll scroll-mt-16"
     >
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="max-w-6xl mx-auto section-wrap section-frame">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           {/* Left side: Photo */}
           <div className="order-2 lg:order-1">
             <div className="relative w-full max-w-md mx-auto">
@@ -32,52 +32,35 @@ export function AboutSection() {
 
           {/* Right side: Story */}
           <div className="order-1 lg:order-2">
-            <div className="text-center mb-8">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                About Me
-              </h2>
+            <div className="mb-6 text-center lg:text-left">
+              <p className="section-kicker">About</p>
+              <h2 className="section-title">About Me</h2>
             </div>
 
-            <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+            <div className="space-y-4 text-base md:text-lg text-muted-foreground leading-relaxed">
               <p>
-                I've built and shipped{" "}
-                <span className="text-foreground font-medium">2 production AI products solo</span> —
-                full stack, from architecture to deployment. Not side projects. Live apps with
-                real users, real infrastructure, and real performance requirements.
+                I build backend-first AI products with a production mindset.
+                I care about clean services, stable APIs, and deployments that teams can trust.
               </p>
 
               <p>
-                At Finsight AI, I engineered an async pipeline using{" "}
-                <span className="text-foreground font-medium">Celery + Redis to offload Gemini API calls</span>,
-                hitting 85–417ms response times in production. The Next.js frontend scored{" "}
-                <span className="text-foreground font-medium">95+ on Lighthouse</span>.
-                At CineScope, I integrated{" "}
-                <span className="text-foreground font-medium">Gemini Pro for a conversational movie recommendation engine</span>{" "}
-                with in-memory vector embeddings and JWT refresh token rotation in Redis.
+                My recent work includes async task pipelines with{" "}
+                <span className="text-foreground font-medium">Flask, Celery, and Redis</span>,
+                secure auth flows with token lifecycle controls, and conversational recommendation
+                systems powered by{" "}
+                <span className="text-foreground font-medium">Gemini integrations</span>.
               </p>
 
               <p>
-                I care about the full lifecycle — system design, clean service layers,
-                Swagger-documented APIs, Pytest coverage, and CI/CD on DigitalOcean and Vercel.{" "}
-                <span className="text-foreground font-medium">When I build something, it ships and it works.</span>
+                I work across the full lifecycle: architecture, implementation, documentation,
+                testing workflows, and deployment across DigitalOcean and Vercel.
+                <span className="text-foreground font-medium"> I optimize for systems that survive real usage.</span>
               </p>
 
               <p className="text-foreground font-semibold">
                 Graduating May 2026, available immediately. Looking for an early-stage team
                 where I can own backend systems and move fast.
               </p>
-            </div>
-
-            {/* Quick stats */}
-            <div className="mt-8 grid grid-cols-2 gap-6">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-cyan-400 mb-1">85ms</div>
-                <div className="text-sm text-muted-foreground">Avg API Response (prod)</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-cyan-400 mb-1">95+</div>
-                <div className="text-sm text-muted-foreground">Lighthouse Score</div>
-              </div>
             </div>
           </div>
         </div>

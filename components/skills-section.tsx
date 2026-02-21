@@ -82,13 +82,13 @@ const SkillCard = ({
     <div className="relative z-20 h-full flex flex-col">
       <div className="flex items-center gap-3 mb-4">
         <span className="text-cyan-400">{icon}</span>
-        <h3 className="text-xl font-semibold text-white">{title}</h3>
+        <h3 className="text-xl font-semibold text-foreground">{title}</h3>
       </div>
       <ul className="list-none space-y-2 flex-grow">
         {skills.map((skill) => (
           <li key={skill} className="flex gap-2 items-start">
             <CheckIcon />
-            <span className="text-neutral-300 text-sm font-medium">{skill}</span>
+            <span className="text-muted-foreground text-sm font-medium">{skill}</span>
           </li>
         ))}
       </ul>
@@ -118,16 +118,17 @@ const CheckIcon = () => {
 
 export function SkillsSection() {
   return (
-    <section id="skills" className="py-24 px-4 md:px-8 scroll-mt-16">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-16 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Technical Skills</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+    <section id="skills" className="section-shell section-shell-alt scroll-mt-16">
+      <div className="max-w-6xl mx-auto section-wrap section-frame">
+        <div className="section-intro">
+          <p className="section-kicker">Capabilities</p>
+          <h2 className="section-title">Technical Skills</h2>
+          <p className="section-subtitle">
             My technical toolbox for building scalable, production-ready applications.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {skillsData.map((category) => (
             <SkillCard
               key={category.category}

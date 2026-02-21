@@ -35,11 +35,12 @@ export function AchievementsSection() {
   const sectionRef = useInView()
 
   return (
-    <section id="achievements" ref={sectionRef} className="py-24 px-4 md:px-8 animate-on-scroll scroll-mt-16">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-16 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Certifications</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+    <section id="achievements" ref={sectionRef} className="section-shell animate-on-scroll scroll-mt-16">
+      <div className="max-w-6xl mx-auto section-wrap section-frame">
+        <div className="section-intro">
+          <p className="section-kicker">Credentials</p>
+          <h2 className="section-title">Certifications</h2>
+          <p className="section-subtitle">
             Verified credentials from Harvard, Coursera, IBM, and Udemy.
           </p>
         </div>
@@ -51,7 +52,7 @@ export function AchievementsSection() {
               href={cert.pdfPath}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-neutral-900 border border-neutral-800 rounded-lg p-6 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20 group cursor-pointer"
+              className="surface-card desktop-card-hover rounded-xl p-6 group cursor-pointer"
             >
               <div className="flex items-center justify-center mb-4 h-16">
                 <IconAward className="w-12 h-12 text-cyan-400 group-hover:scale-110 transition-transform" />
@@ -63,7 +64,7 @@ export function AchievementsSection() {
 
               <div className="text-center">
                 <p className="text-sm text-muted-foreground mb-1">{cert.issuer}</p>
-                <p className="text-xs text-muted-foreground">{cert.date}</p>
+                <p className="text-xs text-muted-foreground/80">{cert.date}</p>
               </div>
 
               <div className="mt-4 flex items-center justify-center gap-2 text-cyan-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity">

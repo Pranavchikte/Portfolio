@@ -7,13 +7,11 @@ export function useMediaQuery(query: string): boolean {
 
   useEffect(() => {
     const media = window.matchMedia(query)
-    if (media.matches !== matches) {
-      setMatches(media.matches)
-    }
     const listener = () => setMatches(media.matches)
+    listener()
     media.addEventListener("change", listener)
     return () => media.removeEventListener("change", listener)
-  }, [matches, query])
+  }, [query])
 
   return matches
 }
@@ -41,7 +39,7 @@ export function useAnimationSettings() {
   const isTablet = useMediaQuery("(min-width: 640px) and (max-width: 1023px)")
   const prefersReducedMotion = usePrefersReducedMotion()
 
-  const disableAnimations = isMobile || prefersReducedMotion
+  const disableAnimations = isMobile || isTablet || prefersReducedMotion
   const disableHeavyAnimations = isMobile || isTablet || prefersReducedMotion
 
   return {
