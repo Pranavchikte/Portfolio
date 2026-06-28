@@ -12,7 +12,6 @@ import {
   IconServer,
 } from "@tabler/icons-react"
 import { Header } from "@/components/header"
-import { Button } from "@/components/ui/button"
 import { getProjectBySlug, projects } from "@/lib/projects"
 import { siteConfig } from "@/lib/site"
 
@@ -41,9 +40,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   const project = getProjectBySlug(slug)
 
   if (!project) {
-    return {
-      title: "Project Not Found",
-    }
+    return { title: "Project Not Found" }
   }
 
   const title = `${project.title} | ${siteConfig.name}`
@@ -53,22 +50,13 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   return {
     title,
     description,
-    alternates: {
-      canonical: url,
-    },
+    alternates: { canonical: url },
     openGraph: {
       title,
       description,
       url,
       type: "article",
-      images: [
-        {
-          url: project.image,
-          width: 1200,
-          height: 630,
-          alt: project.title,
-        },
-      ],
+      images: [{ url: project.image, width: 1200, height: 630, alt: project.title }],
     },
     twitter: {
       card: "summary_large_image",
@@ -83,121 +71,119 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   const { slug } = await params
   const project = getProjectBySlug(slug)
 
-  if (!project) {
-    notFound()
-  }
+  if (!project) notFound()
 
   return (
     <main className="min-h-screen bg-background">
       <Header />
 
-      <section className="pt-32 pb-16 px-6 md:px-8">
-        <div className="max-w-6xl mx-auto">
+      <section className="pt-28 pb-20 px-6 md:px-8">
+        <div className="max-w-3xl mx-auto">
           <Link
             href="/#projects"
-            className="inline-flex items-center text-muted-foreground hover:text-primary mb-8 transition-colors"
+            className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-10 transition-colors"
           >
             ← Back to Projects
           </Link>
 
+          {/* Header */}
           <div className="mb-8">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4">{project.title}</h1>
-            <p className="text-xl text-muted-foreground mb-6">{project.detailSubtitle}</p>
-            <div className="flex gap-4 flex-wrap">
-              <Button asChild className="btn-primary" size="lg">
-                <a
-                  href={project.links.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2"
-                >
-                  <IconExternalLink className="w-5 h-5" />
-                  Live Demo
-                </a>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <a
-                  href={project.links.backend}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2"
-                >
-                  <IconBrandGithub className="w-5 h-5" />
-                  Backend
-                </a>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <a
-                  href={project.links.frontend}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2"
-                >
-                  <IconBrandGithub className="w-5 h-5" />
-                  Frontend
-                </a>
-              </Button>
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-3">{project.title}</h1>
+            <p className="text-lg text-muted-foreground mb-6">{project.detailSubtitle}</p>
+            <div className="flex gap-3 flex-wrap">
+              <a
+                href={project.links.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary inline-flex items-center gap-2 text-sm"
+              >
+                <IconExternalLink className="w-4 h-4" />
+                Live Demo
+              </a>
+              <a
+                href={project.links.backend}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground hover:bg-secondary transition-colors"
+              >
+                <IconBrandGithub className="w-4 h-4" />
+                Backend
+              </a>
+              <a
+                href={project.links.frontend}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground hover:bg-secondary transition-colors"
+              >
+                <IconBrandGithub className="w-4 h-4" />
+                Frontend
+              </a>
             </div>
           </div>
 
-          <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-border shadow-2xl mb-16">
+          {/* Image */}
+          <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-border mb-14">
             <Image src={project.image} alt={`${project.title} preview`} fill className="object-cover" priority />
           </div>
 
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-4">The Problem</h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">{project.problem}</p>
+          {/* Problem */}
+          <div className="mb-12">
+            <h2 className="text-2xl font-bold mb-3">The Problem</h2>
+            <p className="text-base text-muted-foreground leading-relaxed">{project.problem}</p>
           </div>
 
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6">The Solution</h2>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-8">{project.solution}</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Solution */}
+          <div className="mb-12">
+            <h2 className="text-2xl font-bold mb-4">The Solution</h2>
+            <p className="text-base text-muted-foreground leading-relaxed mb-6">{project.solution}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {project.features.map((feature) => {
                 const FeatureIcon = iconMap[feature.icon]
                 return (
-                  <div key={feature.title} className="bg-card border border-border p-6 rounded-lg">
-                    <div className="flex items-center gap-3 mb-3">
-                      <FeatureIcon className="w-6 h-6 text-cyan-400" />
-                      <h3 className="text-xl font-semibold">{feature.title}</h3>
+                  <div key={feature.title} className="surface-card rounded-xl p-5">
+                    <div className="flex items-center gap-2.5 mb-2">
+                      <FeatureIcon className="w-5 h-5 text-primary" />
+                      <h3 className="font-semibold text-foreground">{feature.title}</h3>
                     </div>
-                    <p className="text-muted-foreground">{feature.description}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
                   </div>
                 )
               })}
             </div>
           </div>
 
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6">Tech Stack</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {/* Tech Stack */}
+          <div className="mb-12">
+            <h2 className="text-2xl font-bold mb-4">Tech Stack</h2>
+            <div className="flex flex-wrap gap-2">
               {project.stack.map((tech) => (
-                <div
+                <span
                   key={tech}
-                  className="bg-card border border-border px-4 py-3 rounded-lg text-center font-medium"
+                  className="rounded-md border border-border bg-secondary px-3 py-1.5 text-sm font-medium text-foreground"
                 >
                   {tech}
-                </div>
+                </span>
               ))}
             </div>
           </div>
 
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6">System Architecture</h2>
-            <div className="bg-card border border-border p-8 rounded-lg">
+          {/* Architecture */}
+          <div className="mb-12">
+            <h2 className="text-2xl font-bold mb-4">System Architecture</h2>
+            <div className="surface-card rounded-xl p-6">
               <div className="space-y-3">
                 {project.architectureSteps.map((step, i) => (
                   <div key={step}>
-                    <div className="bg-cyan-500/20 text-cyan-400 px-4 py-2 rounded-md font-mono text-sm inline-block">
+                    <div className="bg-secondary border border-border px-4 py-2 rounded-md font-mono text-sm text-foreground inline-block">
                       {step}
                     </div>
                     {i < project.architectureSteps.length - 1 && (
-                      <div className="pl-4 text-muted-foreground mt-1">↓</div>
+                      <div className="pl-4 text-muted-foreground mt-1 text-sm">↓</div>
                     )}
                   </div>
                 ))}
               </div>
-              <div className="mt-6 pt-6 border-t border-border">
+              <div className="mt-5 pt-5 border-t border-border">
                 <p className="text-sm text-muted-foreground">
                   <span className="font-semibold text-foreground">Deployment:</span>{" "}
                   {project.deploymentNote}
@@ -206,15 +192,17 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             </div>
           </div>
 
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6">My Role & Contributions</h2>
-            <div className="bg-card border border-border p-8 rounded-lg">
-              <ul className="space-y-4 text-lg text-muted-foreground">
+          {/* Contributions */}
+          <div className="mb-12">
+            <h2 className="text-2xl font-bold mb-4">My Role & Contributions</h2>
+            <div className="surface-card rounded-xl p-6">
+              <ul className="space-y-3">
                 {project.contributions.map((item) => (
-                  <li key={item.bold} className="flex items-start gap-3">
-                    <span className="text-cyan-400 mt-1">•</span>
-                    <span>
-                      <span className="text-foreground font-medium">{item.bold}</span> {item.rest}
+                  <li key={item.bold} className="flex items-start gap-3 text-sm">
+                    <span className="text-primary mt-0.5 shrink-0">•</span>
+                    <span className="text-muted-foreground leading-relaxed">
+                      <span className="font-medium text-foreground">{item.bold}</span>{" "}
+                      {item.rest}
                     </span>
                   </li>
                 ))}
@@ -222,42 +210,45 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             </div>
           </div>
 
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6">Technical Challenge Solved</h2>
-            <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 p-8 rounded-lg">
-              <h3 className="text-xl font-semibold mb-4 text-cyan-400">{project.challenge.challengeTitle}</h3>
-              <p className="text-lg text-muted-foreground mb-6">{project.challenge.challengeBody}</p>
-              <h3 className="text-xl font-semibold mb-4 text-cyan-400">{project.challenge.solutionTitle}</h3>
-              <ol className="list-decimal list-inside space-y-2 text-muted-foreground mb-6 pl-4">
+          {/* Challenge */}
+          <div className="mb-12">
+            <h2 className="text-2xl font-bold mb-4">Technical Challenge Solved</h2>
+            <div className="surface-card rounded-xl p-6 border-l-4 border-primary">
+              <h3 className="font-semibold text-foreground mb-2">{project.challenge.challengeTitle}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-5">{project.challenge.challengeBody}</p>
+              <h3 className="font-semibold text-foreground mb-2">{project.challenge.solutionTitle}</h3>
+              <ol className="list-decimal list-inside space-y-1.5 text-sm text-muted-foreground mb-5 pl-1">
                 {project.challenge.solutionSteps.map((step) => (
                   <li key={step}>{step}</li>
                 ))}
               </ol>
-              <p className="text-lg font-semibold text-foreground">{project.challenge.result}</p>
+              <p className="text-sm font-semibold text-foreground">{project.challenge.result}</p>
             </div>
           </div>
 
-          <div className="text-center py-12 border-t border-border">
-            <h2 className="text-3xl font-bold mb-4">Explore {project.title}</h2>
-            <p className="text-lg text-muted-foreground mb-8">Live in production. Try the demo or read the source code.</p>
-            <div className="flex gap-4 justify-center flex-wrap">
-              <Button asChild className="btn-primary" size="lg">
-                <a href={project.links.demo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2">
-                  <IconExternalLink className="w-5 h-5" />
-                  Try Live Demo
-                </a>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <a
-                  href={project.links.backend}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2"
-                >
-                  <IconBrandGithub className="w-5 h-5" />
-                  View on GitHub
-                </a>
-              </Button>
+          {/* Footer CTA */}
+          <div className="text-center pt-10 border-t border-border">
+            <h2 className="text-2xl font-bold mb-2">Explore {project.title}</h2>
+            <p className="text-sm text-muted-foreground mb-6">Live in production — try the demo or read the source.</p>
+            <div className="flex gap-3 justify-center flex-wrap">
+              <a
+                href={project.links.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary inline-flex items-center gap-2 text-sm"
+              >
+                <IconExternalLink className="w-4 h-4" />
+                Try Live Demo
+              </a>
+              <a
+                href={project.links.backend}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground hover:bg-secondary transition-colors"
+              >
+                <IconBrandGithub className="w-4 h-4" />
+                View on GitHub
+              </a>
             </div>
           </div>
         </div>

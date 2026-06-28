@@ -5,7 +5,6 @@ import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import { Toaster } from "sonner"
-import { ThemeProvider } from "@/components/theme-provider"
 import { siteConfig } from "@/lib/site"
 import "./globals.css"
 
@@ -17,12 +16,16 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: [
+    "Software Engineer",
+    "Agentic AI",
+    "LLM APIs",
     "Backend Engineer",
-    "AI Systems",
+    "Python",
     "FastAPI",
     "Flask",
     "Redis",
     "Gemini API",
+    "TCS",
     "Portfolio",
   ],
   alternates: {
@@ -53,39 +56,17 @@ export const metadata: Metadata = {
   },
 }
 
-const themeInitScript = `
-(() => {
-  try {
-    const storedTheme = localStorage.getItem("theme")
-    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-    const theme = storedTheme === "light" || storedTheme === "dark"
-      ? storedTheme
-      : (systemPrefersDark ? "dark" : "light")
-    document.documentElement.classList.toggle("dark", theme === "dark")
-    document.documentElement.setAttribute("data-theme", theme)
-  } catch {
-    document.documentElement.classList.add("dark")
-    document.documentElement.setAttribute("data-theme", "dark")
-  }
-})()
-`
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-      </head>
+    <html lang="en">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}>
-        <ThemeProvider>
-          <Suspense fallback={null}>{children}</Suspense>
-          <Toaster position="bottom-right" richColors />
-          <Analytics />
-        </ThemeProvider>
+        <Suspense fallback={null}>{children}</Suspense>
+        <Toaster position="bottom-right" richColors />
+        <Analytics />
       </body>
     </html>
   )
