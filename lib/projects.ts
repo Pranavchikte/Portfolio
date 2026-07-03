@@ -8,7 +8,6 @@ export type Project = {
   slug: string
   order: number
   title: string
-  image: string
   cardSummary: string
   cardProblem: string
   cardSolution: string
@@ -43,7 +42,6 @@ export const projects: Project[] = [
     slug: "cinescope",
     order: 1,
     title: "CineScope",
-    image: "/m1.png",
     cardSummary:
       "Full-stack movie platform with conversational recommendations, Redis caching, and secure token rotation.",
     cardProblem:
@@ -151,7 +149,6 @@ export const projects: Project[] = [
     slug: "finsight-ai",
     order: 2,
     title: "Finsight AI",
-    image: "/f1.jpg",
     cardSummary:
       "AI-powered expense manager with async processing, robust auth, and production-ready full-stack deployment.",
     cardProblem:

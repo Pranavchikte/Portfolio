@@ -2,6 +2,15 @@ import type React from "react"
 import type { Metadata } from "next"
 import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
+import { Playfair_Display } from "next/font/google"
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+  style: ["normal", "italic"],
+  variable: "--font-playfair",
+  display: "swap",
+})
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import { Toaster } from "sonner"
@@ -55,18 +64,9 @@ export const metadata: Metadata = {
 
 const themeInitScript = `
 (() => {
-  try {
-    const storedTheme = localStorage.getItem("theme")
-    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-    const theme = storedTheme === "light" || storedTheme === "dark"
-      ? storedTheme
-      : (systemPrefersDark ? "dark" : "light")
-    document.documentElement.classList.toggle("dark", theme === "dark")
-    document.documentElement.setAttribute("data-theme", theme)
-  } catch {
-    document.documentElement.classList.add("dark")
-    document.documentElement.setAttribute("data-theme", "dark")
-  }
+  document.documentElement.classList.remove("dark")
+  document.documentElement.setAttribute("data-theme", "light")
+  try { localStorage.removeItem("theme") } catch {}
 })()
 `
 
@@ -80,7 +80,7 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}>
+      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${playfair.variable} antialiased`}>
         <ThemeProvider>
           <Suspense fallback={null}>{children}</Suspense>
           <Toaster position="bottom-right" richColors />

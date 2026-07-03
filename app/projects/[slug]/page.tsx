@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import Image from "next/image"
 import { notFound } from "next/navigation"
 import {
   IconBolt,
@@ -10,17 +9,20 @@ import {
   IconExternalLink,
   IconSearch,
   IconServer,
+  IconArrowUpRight,
+  IconArrowLeft,
 } from "@tabler/icons-react"
 import { Header } from "@/components/header"
-import { Button } from "@/components/ui/button"
 import { getProjectBySlug, projects } from "@/lib/projects"
 import { siteConfig } from "@/lib/site"
 
 type ProjectPageProps = {
-  params: Promise<{
-    slug: string
-  }>
+  params: Promise<{ slug: string }>
 }
+
+const BORDER = "0.5px solid #E8E5DF"
+const SERIF = "var(--font-playfair), Georgia, serif"
+const MONO = "var(--font-geist-mono), ui-monospace, monospace"
 
 const iconMap = {
   cpu: IconCpu,
@@ -31,20 +33,14 @@ const iconMap = {
 }
 
 export async function generateStaticParams() {
-  return projects.map((project) => ({
-    slug: project.slug,
-  }))
+  return projects.map((project) => ({ slug: project.slug }))
 }
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params
   const project = getProjectBySlug(slug)
 
-  if (!project) {
-    return {
-      title: "Project Not Found",
-    }
-  }
+  if (!project) return { title: "Project Not Found" }
 
   const title = `${project.title} | ${siteConfig.name}`
   const description = project.detailSubtitle
@@ -53,215 +49,270 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   return {
     title,
     description,
-    alternates: {
-      canonical: url,
-    },
+    alternates: { canonical: url },
     openGraph: {
       title,
       description,
       url,
       type: "article",
-      images: [
-        {
-          url: project.image,
-          width: 1200,
-          height: 630,
-          alt: project.title,
-        },
-      ],
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: project.title }],
     },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [project.image],
-    },
+    twitter: { card: "summary_large_image", title, description, images: ["/opengraph-image"] },
   }
+}
+
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="text-[10px] font-medium uppercase tracking-[0.18em] mb-8" style={{ color: "#B0A89E" }}>
+      {children}
+    </p>
+  )
+}
+
+function GhostNum({ n }: { n: string }) {
+  return (
+    <span
+      className="absolute top-0 right-0 text-[72px] font-black leading-none select-none pointer-events-none"
+      style={{ fontFamily: SERIF, color: "#F0EDE8", letterSpacing: "-0.04em" }}
+      aria-hidden
+    >
+      {n}
+    </span>
+  )
+}
+
+function ArrowLink({ href, children, accent = false }: { href: string; children: React.ReactNode; accent?: boolean }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-1 text-[11px] font-medium uppercase tracking-[0.1em] transition-opacity hover:opacity-60"
+      style={{ color: accent ? "#BF5C1A" : "#9A9690" }}
+    >
+      {children}
+      <IconArrowUpRight className="h-3 w-3 stroke-[1.5]" aria-hidden />
+    </a>
+  )
 }
 
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   const { slug } = await params
   const project = getProjectBySlug(slug)
 
-  if (!project) {
-    notFound()
-  }
+  if (!project) notFound()
 
   return (
-    <main className="min-h-screen bg-background">
+    <main style={{ background: "#F8F7F3", color: "#1A1918", minHeight: "100vh" }}>
       <Header />
 
-      <section className="pt-32 pb-16 px-6 md:px-8">
-        <div className="max-w-6xl mx-auto">
+      {/* Content — offset for fixed header */}
+      <div className="pt-14">
+
+        {/* ── Back + Links bar ── */}
+        <div
+          className="flex items-center justify-between px-8 md:px-16 py-5"
+          style={{ borderBottom: BORDER }}
+        >
           <Link
             href="/#projects"
-            className="inline-flex items-center text-muted-foreground hover:text-primary mb-8 transition-colors"
+            className="inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.12em] transition-opacity hover:opacity-60"
+            style={{ color: "#9A9690" }}
           >
-            ← Back to Projects
+            <IconArrowLeft className="h-3 w-3 stroke-[1.5]" aria-hidden />
+            Work
           </Link>
-
-          <div className="mb-8">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4">{project.title}</h1>
-            <p className="text-xl text-muted-foreground mb-6">{project.detailSubtitle}</p>
-            <div className="flex gap-4 flex-wrap">
-              <Button asChild className="btn-primary" size="lg">
-                <a
-                  href={project.links.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2"
-                >
-                  <IconExternalLink className="w-5 h-5" />
-                  Live Demo
-                </a>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <a
-                  href={project.links.backend}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2"
-                >
-                  <IconBrandGithub className="w-5 h-5" />
-                  Backend
-                </a>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <a
-                  href={project.links.frontend}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2"
-                >
-                  <IconBrandGithub className="w-5 h-5" />
-                  Frontend
-                </a>
-              </Button>
-            </div>
-          </div>
-
-          <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-border shadow-2xl mb-16">
-            <Image src={project.image} alt={`${project.title} preview`} fill className="object-cover" priority />
-          </div>
-
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-4">The Problem</h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">{project.problem}</p>
-          </div>
-
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6">The Solution</h2>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-8">{project.solution}</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {project.features.map((feature) => {
-                const FeatureIcon = iconMap[feature.icon]
-                return (
-                  <div key={feature.title} className="bg-card border border-border p-6 rounded-lg">
-                    <div className="flex items-center gap-3 mb-3">
-                      <FeatureIcon className="w-6 h-6 text-cyan-400" />
-                      <h3 className="text-xl font-semibold">{feature.title}</h3>
-                    </div>
-                    <p className="text-muted-foreground">{feature.description}</p>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6">Tech Stack</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-              {project.stack.map((tech) => (
-                <div
-                  key={tech}
-                  className="bg-card border border-border px-4 py-3 rounded-lg text-center font-medium"
-                >
-                  {tech}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6">System Architecture</h2>
-            <div className="bg-card border border-border p-8 rounded-lg">
-              <div className="space-y-3">
-                {project.architectureSteps.map((step, i) => (
-                  <div key={step}>
-                    <div className="bg-cyan-500/20 text-cyan-400 px-4 py-2 rounded-md font-mono text-sm inline-block">
-                      {step}
-                    </div>
-                    {i < project.architectureSteps.length - 1 && (
-                      <div className="pl-4 text-muted-foreground mt-1">↓</div>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <div className="mt-6 pt-6 border-t border-border">
-                <p className="text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">Deployment:</span>{" "}
-                  {project.deploymentNote}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6">My Role & Contributions</h2>
-            <div className="bg-card border border-border p-8 rounded-lg">
-              <ul className="space-y-4 text-lg text-muted-foreground">
-                {project.contributions.map((item) => (
-                  <li key={item.bold} className="flex items-start gap-3">
-                    <span className="text-cyan-400 mt-1">•</span>
-                    <span>
-                      <span className="text-foreground font-medium">{item.bold}</span> {item.rest}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6">Technical Challenge Solved</h2>
-            <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 p-8 rounded-lg">
-              <h3 className="text-xl font-semibold mb-4 text-cyan-400">{project.challenge.challengeTitle}</h3>
-              <p className="text-lg text-muted-foreground mb-6">{project.challenge.challengeBody}</p>
-              <h3 className="text-xl font-semibold mb-4 text-cyan-400">{project.challenge.solutionTitle}</h3>
-              <ol className="list-decimal list-inside space-y-2 text-muted-foreground mb-6 pl-4">
-                {project.challenge.solutionSteps.map((step) => (
-                  <li key={step}>{step}</li>
-                ))}
-              </ol>
-              <p className="text-lg font-semibold text-foreground">{project.challenge.result}</p>
-            </div>
-          </div>
-
-          <div className="text-center py-12 border-t border-border">
-            <h2 className="text-3xl font-bold mb-4">Explore {project.title}</h2>
-            <p className="text-lg text-muted-foreground mb-8">Live in production. Try the demo or read the source code.</p>
-            <div className="flex gap-4 justify-center flex-wrap">
-              <Button asChild className="btn-primary" size="lg">
-                <a href={project.links.demo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2">
-                  <IconExternalLink className="w-5 h-5" />
-                  Try Live Demo
-                </a>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <a
-                  href={project.links.backend}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2"
-                >
-                  <IconBrandGithub className="w-5 h-5" />
-                  View on GitHub
-                </a>
-              </Button>
-            </div>
+          <div className="flex items-center gap-6">
+            <ArrowLink href={project.links.demo} accent>Live</ArrowLink>
+            <ArrowLink href={project.links.backend}>GitHub</ArrowLink>
           </div>
         </div>
-      </section>
+
+        {/* ── Title block ── */}
+        <section
+          className="relative px-8 md:px-16 pt-16 pb-20 overflow-hidden"
+          style={{ borderBottom: BORDER }}
+        >
+          <GhostNum n="00" />
+          <p className="text-[10px] font-medium uppercase tracking-[0.18em] mb-6" style={{ color: "#B0A89E" }}>
+            Case Study
+          </p>
+          <h1
+            className="font-black leading-[0.88] tracking-[-0.02em] mb-6 max-w-[680px]"
+            style={{ fontFamily: SERIF, fontSize: "clamp(48px, 8vw, 100px)", color: "#1A1918" }}
+          >
+            {project.title}
+          </h1>
+          <p className="text-[14px] leading-[1.8] max-w-[520px]" style={{ color: "#787369" }}>
+            {project.detailSubtitle}
+          </p>
+        </section>
+
+        {/* ── Problem ── */}
+        <section
+          className="relative px-8 md:px-16 py-16 md:py-20 overflow-hidden"
+          style={{ borderBottom: BORDER }}
+        >
+          <GhostNum n="01" />
+          <SectionLabel>The Problem</SectionLabel>
+          <p className="text-[15px] leading-[1.9] max-w-[600px]" style={{ color: "#787369" }}>
+            {project.problem}
+          </p>
+        </section>
+
+        {/* ── Solution ── */}
+        <section
+          className="relative px-8 md:px-16 py-16 md:py-20 overflow-hidden"
+          style={{ borderBottom: BORDER }}
+        >
+          <GhostNum n="02" />
+          <SectionLabel>The Solution</SectionLabel>
+          <p className="text-[15px] leading-[1.9] max-w-[600px] mb-14" style={{ color: "#787369" }}>
+            {project.solution}
+          </p>
+
+          {/* Feature rows */}
+          <div style={{ borderTop: BORDER }}>
+            {project.features.map((feature) => {
+              const FeatureIcon = iconMap[feature.icon]
+              return (
+                <div
+                  key={feature.title}
+                  className="grid gap-6 py-4"
+                  style={{ borderBottom: BORDER, gridTemplateColumns: "20px 160px 1fr" }}
+                >
+                  <FeatureIcon className="w-4 h-4 mt-0.5 stroke-[1.5]" style={{ color: "#BF5C1A" }} />
+                  <span className="text-[12px] font-semibold" style={{ color: "#1A1918" }}>
+                    {feature.title}
+                  </span>
+                  <span className="text-[12px] leading-[1.7]" style={{ color: "#787369" }}>
+                    {feature.description}
+                  </span>
+                </div>
+              )
+            })}
+          </div>
+        </section>
+
+        {/* ── Stack ── */}
+        <section
+          className="relative px-8 md:px-16 py-16 md:py-20 overflow-hidden"
+          style={{ borderBottom: BORDER }}
+        >
+          <GhostNum n="03" />
+          <SectionLabel>Stack</SectionLabel>
+          <p className="text-[13px] leading-[2] max-w-[600px]" style={{ color: "#787369", fontFamily: MONO }}>
+            {project.stack.map((tech, i) => (
+              <span key={tech}>
+                {i > 0 && <span style={{ color: "#D5D0C9" }}> · </span>}
+                {tech}
+              </span>
+            ))}
+          </p>
+        </section>
+
+        {/* ── Architecture ── */}
+        <section
+          className="relative px-8 md:px-16 py-16 md:py-20 overflow-hidden"
+          style={{ borderBottom: BORDER }}
+        >
+          <GhostNum n="04" />
+          <SectionLabel>Architecture</SectionLabel>
+          <div className="max-w-[560px]" style={{ borderTop: BORDER }}>
+            {project.architectureSteps.map((step, i) => (
+              <div
+                key={step}
+                className="flex items-baseline gap-4 py-3"
+                style={{ borderBottom: BORDER }}
+              >
+                <span
+                  className="shrink-0 text-[11px] font-medium"
+                  style={{ fontFamily: MONO, color: "#BF5C1A", minWidth: "28px" }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="text-[12px] leading-[1.65]" style={{ fontFamily: MONO, color: "#787369" }}>
+                  {step}
+                </span>
+              </div>
+            ))}
+          </div>
+          <p className="mt-6 text-[11px] leading-[1.7] max-w-[480px]" style={{ color: "#B0A89E" }}>
+            {project.deploymentNote}
+          </p>
+        </section>
+
+        {/* ── Contributions ── */}
+        <section
+          className="relative px-8 md:px-16 py-16 md:py-20 overflow-hidden"
+          style={{ borderBottom: BORDER }}
+        >
+          <GhostNum n="05" />
+          <SectionLabel>My Role</SectionLabel>
+          <div className="max-w-[600px] flex flex-col gap-5">
+            {project.contributions.map((item) => (
+              <p key={item.bold} className="text-[13px] leading-[1.8]" style={{ color: "#787369" }}>
+                <span className="font-semibold" style={{ color: "#1A1918" }}>{item.bold}</span>
+                {" "}{item.rest}
+              </p>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Challenge ── */}
+        <section
+          className="relative px-8 md:px-16 py-16 md:py-20 overflow-hidden"
+          style={{ borderBottom: BORDER }}
+        >
+          <GhostNum n="06" />
+          <SectionLabel>Technical Challenge</SectionLabel>
+          <div
+            className="max-w-[580px] pl-5"
+            style={{ borderLeft: "1.5px solid #BF5C1A" }}
+          >
+            <p className="text-[12px] font-semibold uppercase tracking-[0.1em] mb-3" style={{ color: "#BF5C1A" }}>
+              {project.challenge.challengeTitle}
+            </p>
+            <p className="text-[13px] leading-[1.85] mb-8" style={{ color: "#787369" }}>
+              {project.challenge.challengeBody}
+            </p>
+            <p className="text-[12px] font-semibold uppercase tracking-[0.1em] mb-3" style={{ color: "#BF5C1A" }}>
+              {project.challenge.solutionTitle}
+            </p>
+            <ol className="flex flex-col gap-2 mb-8" style={{ listStyle: "none", padding: 0 }}>
+              {project.challenge.solutionSteps.map((step, i) => (
+                <li key={step} className="flex gap-3 text-[13px] leading-[1.7]" style={{ color: "#787369" }}>
+                  <span style={{ color: "#BF5C1A", fontFamily: MONO, fontSize: "11px", paddingTop: "2px" }}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  {step}
+                </li>
+              ))}
+            </ol>
+            <p className="text-[13px] font-semibold" style={{ color: "#1A1918" }}>
+              {project.challenge.result}
+            </p>
+          </div>
+        </section>
+
+        {/* ── Footer CTA ── */}
+        <section className="px-8 md:px-16 py-20 md:py-28">
+          <p className="text-[10px] font-medium uppercase tracking-[0.18em] mb-6" style={{ color: "#B0A89E" }}>
+            Explore {project.title}
+          </p>
+          <h2
+            className="font-bold italic leading-[0.9] mb-10 max-w-[520px]"
+            style={{ fontFamily: SERIF, fontSize: "clamp(40px, 6vw, 72px)", color: "#1A1918" }}
+          >
+            Live in production.
+          </h2>
+          <div className="flex flex-wrap gap-8">
+            <ArrowLink href={project.links.demo} accent>Try the demo</ArrowLink>
+            <ArrowLink href={project.links.backend}>Backend source</ArrowLink>
+            <ArrowLink href={project.links.frontend}>Frontend source</ArrowLink>
+          </div>
+        </section>
+      </div>
     </main>
   )
 }

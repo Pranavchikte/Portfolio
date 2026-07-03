@@ -23,7 +23,7 @@ export function ProjectsSection() {
               key={project.slug}
               project={{
                 title: project.title,
-                image: project.image,
+                image: "",
                 summary: project.cardSummary,
                 problem: project.cardProblem,
                 solution: project.cardSolution,

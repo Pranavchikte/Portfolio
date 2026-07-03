@@ -2,8 +2,9 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { IconArrowLeft, IconDownload } from "@tabler/icons-react"
 import { Header } from "@/components/header"
-import { Button } from "@/components/ui/button"
 import { siteConfig } from "@/lib/site"
+
+const BORDER = "0.5px solid #E8E5DF"
 
 export const metadata: Metadata = {
   title: "Resume",
@@ -17,43 +18,60 @@ export default function ResumePage() {
   const resumePath = encodeURI(siteConfig.resumePdf)
 
   return (
-    <main className="min-h-screen bg-background">
+    <main style={{ background: "#F8F7F3", color: "#1A1918", minHeight: "100vh" }}>
       <Header />
 
-      <section className="pt-32 pb-12 px-4 md:px-8">
-        <div className="max-w-6xl mx-auto">
+      <div className="pt-14">
+        {/* Top bar */}
+        <div
+          className="flex items-center justify-between px-8 md:px-16 py-5"
+          style={{ borderBottom: BORDER }}
+        >
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-6"
+            className="inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.12em] transition-opacity hover:opacity-60"
+            style={{ color: "#9A9690" }}
           >
-            <IconArrowLeft className="h-4 w-4" />
-            Back to Home
+            <IconArrowLeft className="h-3 w-3 stroke-[1.5]" aria-hidden />
+            Home
           </Link>
+          <a
+            href={resumePath}
+            download="Pranav_Chikte_Resume.pdf"
+            className="inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.12em] transition-opacity hover:opacity-60"
+            style={{ color: "#BF5C1A" }}
+          >
+            <IconDownload className="h-3 w-3 stroke-[1.5]" aria-hidden />
+            Download
+          </a>
+        </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-            <div>
-              <h1 className="text-4xl md:text-5xl font-bold">Resume</h1>
-              <p className="text-muted-foreground mt-2">
-                {siteConfig.name} · {siteConfig.role}
-              </p>
-            </div>
-            <Button asChild className="btn-primary">
-              <a href={resumePath} download="Pranav_Chikte_Resume.pdf" className="inline-flex items-center gap-2">
-                <IconDownload className="h-4 w-4" />
-                Download PDF
-              </a>
-            </Button>
-          </div>
+        {/* Header info */}
+        <div className="px-8 md:px-16 py-12" style={{ borderBottom: BORDER }}>
+          <p className="text-[10px] font-medium uppercase tracking-[0.18em] mb-3" style={{ color: "#B0A89E" }}>
+            Resume
+          </p>
+          <h1
+            className="font-black leading-[0.9] tracking-[-0.02em]"
+            style={{ fontFamily: "var(--font-playfair), Georgia, serif", fontSize: "clamp(36px, 5vw, 64px)", color: "#1A1918" }}
+          >
+            {siteConfig.name}
+          </h1>
+          <p className="mt-3 text-[13px]" style={{ color: "#9A9690" }}>{siteConfig.role}</p>
+        </div>
 
-          <div className="rounded-xl border border-border bg-card overflow-hidden">
+        {/* PDF viewer */}
+        <div className="px-8 md:px-16 py-10">
+          <div style={{ border: BORDER, background: "#F2F0EB" }}>
             <iframe
               src={resumePath}
               title="Pranav Chikte Resume"
-              className="w-full h-[75vh] md:h-[82vh]"
+              className="w-full"
+              style={{ height: "78vh", display: "block" }}
             />
           </div>
         </div>
-      </section>
+      </div>
     </main>
   )
 }
