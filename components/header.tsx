@@ -28,7 +28,6 @@ export function Header() {
       style={{ borderBottom: BORDER, background: "rgba(248,247,243,0.92)", backdropFilter: "blur(8px)" }}
     >
       <div className="flex items-center justify-between px-8 md:px-16 h-14">
-        {/* Logo */}
         <Link
           href="/"
           className="text-[15px] font-bold tracking-tight transition-opacity hover:opacity-60"
@@ -37,7 +36,6 @@ export function Header() {
           PC
         </Link>
 
-        {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
             <Link
@@ -51,7 +49,6 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Mobile toggle */}
         <button
           className="md:hidden text-[11px] font-medium uppercase tracking-[0.14em] transition-opacity hover:opacity-60"
           style={{ color: "#9A9690" }}
@@ -62,7 +59,6 @@ export function Header() {
         </button>
       </div>
 
-      {/* Mobile menu */}
       {open && (
         <div style={{ borderTop: BORDER, background: "#F8F7F3" }}>
           {navItems.map((item) => (

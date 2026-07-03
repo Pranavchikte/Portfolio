@@ -89,7 +89,6 @@ export default function Home() {
         className="hidden md:flex flex-col items-center justify-between fixed top-0 left-0 h-screen py-6 z-30"
         style={{ width: "88px", borderRight: BORDER, background: "#F8F7F3" }}
       >
-        {/* Logo */}
         <Link
           href="/"
           className="text-[15px] font-bold tracking-tight transition-opacity hover:opacity-60"
@@ -98,7 +97,6 @@ export default function Home() {
           PC
         </Link>
 
-        {/* Rotating section label */}
         <div
           className="flex items-center justify-center"
           style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
@@ -112,7 +110,6 @@ export default function Home() {
           </span>
         </div>
 
-        {/* Coordinate */}
         <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}>
           <span className="text-[9px] tracking-[0.1em] uppercase" style={{ color: "#C8C3BC" }}>
             18.52°N 73.86°E
@@ -181,7 +178,6 @@ export default function Home() {
           <div className="flex flex-col gap-14">
             {projects.map((project, i) => (
               <article key={project.slug} className="grid md:grid-cols-[200px_1fr] gap-8 md:gap-12">
-                {/* Left: meta */}
                 <div className="flex md:flex-col gap-4 md:gap-0 items-center md:items-start">
                   <span
                     className="font-black leading-none"
@@ -194,7 +190,6 @@ export default function Home() {
                     <p className="text-[10px] font-medium uppercase tracking-[0.12em]" style={{ color: "#BF5C1A" }}>Live</p>
                   </div>
                 </div>
-                {/* Right: content */}
                 <div style={{ borderTop: BORDER, paddingTop: "20px" }}>
                   <h2
                     className="font-bold tracking-[-0.01em] mb-3"

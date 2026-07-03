@@ -1,33 +1,31 @@
 "use client"
 
-import React from "react"
-import { CardSpotlight } from "@/components/ui/card-spotlight"
 import {
   IconCpu,
   IconDatabase,
   IconTool,
   IconCode,
 } from "@tabler/icons-react"
+import { useInView } from "@/hooks/use-in-view"
 
 const skillsData = [
   {
-    category: "AI / ML",
-    icon: <IconCpu className="h-6 w-6" />,
+    category: "Agentic AI & LLMs",
+    icon: <IconCpu className="h-5 w-5" />,
     skills: [
+      "Agentic AI Systems",
+      "Tool Use & Function Calling",
+      "Multi-step LLM Pipelines",
       "Google Gemini API (2.5-flash, Pro)",
       "LLM Integration",
-      "Async AI Processing",
       "Prompt Engineering",
+      "Async AI Processing",
       "Vector Embeddings",
-      "Machine Learning",
-      "Scikit-learn",
-      "Pandas",
-      "NumPy",
     ],
   },
   {
     category: "Backend & Data",
-    icon: <IconDatabase className="h-6 w-6" />,
+    icon: <IconDatabase className="h-5 w-5" />,
     skills: [
       "Python",
       "FastAPI",
@@ -44,7 +42,7 @@ const skillsData = [
   },
   {
     category: "DevOps & Tools",
-    icon: <IconTool className="h-6 w-6" />,
+    icon: <IconTool className="h-5 w-5" />,
     skills: [
       "Docker",
       "Docker Compose",
@@ -58,7 +56,7 @@ const skillsData = [
   },
   {
     category: "Frontend",
-    icon: <IconCode className="h-6 w-6" />,
+    icon: <IconCode className="h-5 w-5" />,
     skills: [
       "TypeScript",
       "JavaScript",
@@ -69,73 +67,45 @@ const skillsData = [
   },
 ]
 
-const SkillCard = ({
-  title,
-  icon,
-  skills,
-}: {
-  title: string
-  icon: React.ReactNode
-  skills: string[]
-}) => (
-  <CardSpotlight className="h-full w-full">
-    <div className="relative z-20 h-full flex flex-col">
-      <div className="flex items-center gap-3 mb-4">
-        <span className="text-cyan-400">{icon}</span>
-        <h3 className="text-xl font-semibold text-foreground">{title}</h3>
-      </div>
-      <ul className="list-none space-y-2 flex-grow">
-        {skills.map((skill) => (
-          <li key={skill} className="flex gap-2 items-start">
-            <CheckIcon />
-            <span className="text-muted-foreground text-sm font-medium">{skill}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </CardSpotlight>
-)
-
-const CheckIcon = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className="h-4 w-4 text-cyan-500 mt-0.5 shrink-0"
-    >
-      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path
-        d="M12 2c-.218 0 -.432 .002 -.642 .005l-.616 .017l-.299 .013l-.579 .034l-.553 .046c-4.785 .464 -6.732 2.411 -7.196 7.196l-.046 .553l-.034 .579c-.005 .098 -.01 .198 -.013 .299l-.017 .616l-.004 .318l-.001 .324c0 .218 .002 .432 .005 .642l.017 .616l.013 .299l.034 .579l.046 .553c.464 4.785 2.411 6.732 7.196 7.196l.553 .046l.579 .034c.098 .005 .198 .01 .299 .013l.616 .017l.642 .005l.642 -.005l.616 -.017l.299 -.013l.579 -.034l.553 -.046c4.785 -.464 6.732 -2.411 7.196 -7.196l.046 -.553l.034 -.579c.005 -.098 .01 -.198 .013 -.299l.017 -.616l.005 -.642l-.005 -.642l-.017 -.616l-.013 -.299l-.034 -.579l-.046 -.553c-.464 -4.785 -2.411 -6.732 -7.196 -7.196l-.553 -.046l-.579 -.034a28.058 28.058 0 0 0 -.299 -.013l-.616 -.017l-.318 -.004l-.324 -.001zm2.293 7.293a1 1 0 0 1 1.497 1.32l-.083 .094l-4 4a1 1 0 0 1 -1.32 .083l-.094 -.083l-2 -2a1 1 0 0 1 1.32 -1.497l.094 .083l1.293 1.292l3.293 -3.292z"
-        fill="currentColor"
-        strokeWidth="0"
-      />
-    </svg>
-  )
-}
-
 export function SkillsSection() {
+  const sectionRef = useInView()
+
   return (
-    <section id="skills" className="section-shell section-shell-alt scroll-mt-16">
-      <div className="max-w-6xl mx-auto section-wrap section-frame">
+    <section
+      id="skills"
+      ref={sectionRef}
+      className="section-shell section-shell-alt animate-on-scroll scroll-mt-16"
+    >
+      <div className="mx-auto max-w-4xl">
         <div className="section-intro">
           <p className="section-kicker">Capabilities</p>
           <h2 className="section-title">Technical Skills</h2>
           <p className="section-subtitle">
-            My technical toolbox for building scalable, production-ready applications.
+            Primary focus on agentic AI and backend systems, with supporting skills across the full stack.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {skillsData.map((category) => (
-            <SkillCard
+            <div
               key={category.category}
-              title={category.category}
-              icon={category.icon}
-              skills={category.skills}
-            />
+              className="surface-card card-hover rounded-xl p-6"
+            >
+              <div className="flex items-center gap-2.5 mb-4">
+                <span className="text-primary">{category.icon}</span>
+                <h3 className="text-base font-semibold text-foreground">{category.category}</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {category.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="rounded-md border border-border bg-secondary px-2.5 py-1 text-xs font-medium text-foreground/80"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>

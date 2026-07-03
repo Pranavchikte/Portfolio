@@ -26,12 +26,16 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: [
+    "Software Engineer",
+    "Agentic AI",
+    "LLM APIs",
     "Backend Engineer",
-    "AI Systems",
+    "Python",
     "FastAPI",
     "Flask",
     "Redis",
     "Gemini API",
+    "TCS",
     "Portfolio",
   ],
   alternates: {

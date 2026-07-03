@@ -3,12 +3,10 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import {
   IconBolt,
-  IconBrandGithub,
   IconCpu,
   IconDatabase,
-  IconExternalLink,
-  IconSearch,
   IconServer,
+  IconSearch,
   IconArrowUpRight,
   IconArrowLeft,
 } from "@tabler/icons-react"
@@ -106,7 +104,6 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
     <main style={{ background: "#F8F7F3", color: "#1A1918", minHeight: "100vh" }}>
       <Header />
 
-      {/* Content — offset for fixed header */}
       <div className="pt-14">
 
         {/* ── Back + Links bar ── */}
@@ -171,7 +168,6 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             {project.solution}
           </p>
 
-          {/* Feature rows */}
           <div style={{ borderTop: BORDER }}>
             {project.features.map((feature) => {
               const FeatureIcon = iconMap[feature.icon]
