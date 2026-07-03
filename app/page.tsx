@@ -50,7 +50,7 @@ function ArrowLink({ href, children, accent = false, internal = false }: {
 function SectionNum({ n }: { n: string }) {
   return (
     <span
-      className="absolute top-0 right-0 text-[80px] font-black leading-none select-none pointer-events-none"
+      className="absolute top-0 right-0 text-[56px] md:text-[80px] font-black leading-none select-none pointer-events-none"
       style={{ fontFamily: SERIF, color: "#F0EDE8", letterSpacing: "-0.04em" }}
       aria-hidden
     >
@@ -122,7 +122,7 @@ export default function Home() {
 
         {/* Mobile nav */}
         <nav
-          className="md:hidden flex items-center justify-between px-6 py-5"
+          className="md:hidden flex items-center justify-between px-5 py-4"
           style={{ borderBottom: BORDER }}
         >
           <Link href="/" className="text-[16px] font-bold" style={{ fontFamily: SERIF, color: "#1A1918" }}>PC</Link>
@@ -135,36 +135,34 @@ export default function Home() {
         {/* ── Hero ──────────────────────────────────────────────────── */}
         <section
           id="hero"
-          className="relative px-8 md:px-16 pt-16 pb-20 md:pt-20 md:pb-24 overflow-hidden"
-          style={{ borderBottom: BORDER, minHeight: "88vh" }}
+          className="relative px-5 md:px-16 pt-14 pb-14 md:pt-16 md:pb-20 overflow-hidden"
+          style={{ borderBottom: BORDER }}
         >
           <SectionNum n="01" />
-          <div className="flex flex-col justify-between h-full" style={{ minHeight: "inherit" }}>
-            <div>
-              <p className="text-[11px] font-medium uppercase tracking-[0.18em] mb-12" style={{ color: "#A09890" }}>
-                Software Engineer · Pune ·{" "}
-                <span style={{ color: "#BF5C1A" }}>Open to opportunities</span>
-              </p>
-              <h1
-                className="font-black leading-[0.85] tracking-[-0.03em] mb-8 max-w-[720px]"
-                style={{ fontFamily: SERIF, fontSize: "clamp(64px, 10vw, 130px)", color: "#1A1918" }}
-              >
-                Pranav
-                <br />
-                Chikte
-              </h1>
-              <p className="text-[15px] leading-[1.85] max-w-[440px] mb-3" style={{ color: "#787369" }}>
-                I build{" "}
-                <span className="font-semibold" style={{ color: "#1A1918" }}>agentic AI backends</span>{" "}
-                — systems that reason through failure, coordinate tools, and stay reliable at production scale.
-              </p>
-              <p className="text-[13px] leading-[1.7] max-w-[440px]" style={{ color: "#9A9690" }}>
-                Currently building with{" "}
-                <span className="font-medium" style={{ color: "#BF5C1A" }}>Claude Code</span>{" "}
-                and the Anthropic SDK — learning MCP tool patterns from the ground up.
-              </p>
-            </div>
-            <div className="flex items-center gap-8 mt-14">
+          <div>
+            <p className="text-[11px] font-medium uppercase tracking-[0.18em] mb-8" style={{ color: "#A09890" }}>
+              Software Engineer · Pune ·{" "}
+              <span style={{ color: "#BF5C1A" }}>Open to opportunities</span>
+            </p>
+            <h1
+              className="font-black leading-[0.85] tracking-[-0.03em] mb-6 max-w-[720px]"
+              style={{ fontFamily: SERIF, fontSize: "clamp(48px, 10vw, 130px)", color: "#1A1918" }}
+            >
+              Pranav
+              <br />
+              Chikte
+            </h1>
+            <p className="text-[15px] leading-[1.85] max-w-[440px] mb-3" style={{ color: "#787369" }}>
+              I build{" "}
+              <span className="font-semibold" style={{ color: "#1A1918" }}>agentic AI backends</span>{" "}
+              — systems that reason through failure, coordinate tools, and stay reliable at production scale.
+            </p>
+            <p className="text-[13px] leading-[1.7] max-w-[440px] mb-10" style={{ color: "#9A9690" }}>
+              Currently building with{" "}
+              <span className="font-medium" style={{ color: "#BF5C1A" }}>Claude Code</span>{" "}
+              and the Anthropic SDK — learning MCP tool patterns from the ground up.
+            </p>
+            <div className="flex items-center gap-8">
               <ArrowLink href={siteConfig.social.github} accent>github.com/pranavchikte</ArrowLink>
               <ArrowLink href={siteConfig.resumePdf}>Resume</ArrowLink>
             </div>
@@ -172,35 +170,35 @@ export default function Home() {
         </section>
 
         {/* ── Projects ──────────────────────────────────────────────── */}
-        <section id="projects" className="relative px-8 md:px-16 py-16 md:py-20 overflow-hidden" style={{ borderBottom: BORDER }}>
+        <section id="projects" className="relative px-5 md:px-16 py-10 md:py-14 overflow-hidden" style={{ borderBottom: BORDER }}>
           <SectionNum n="02" />
-          <p className="text-[11px] font-medium uppercase tracking-[0.18em] mb-12" style={{ color: "#B0A89E" }}>Selected Work</p>
-          <div className="flex flex-col gap-14">
+          <p className="text-[11px] font-medium uppercase tracking-[0.18em] mb-6" style={{ color: "#B0A89E" }}>Selected Work</p>
+          <div className="flex flex-col gap-10 max-w-[860px]">
             {projects.map((project, i) => (
-              <article key={project.slug} className="grid md:grid-cols-[200px_1fr] gap-8 md:gap-12">
+              <article key={project.slug} className="grid md:grid-cols-[200px_1fr] gap-6 md:gap-10">
                 <div className="flex md:flex-col gap-4 md:gap-0 items-center md:items-start">
                   <span
                     className="font-black leading-none"
-                    style={{ fontFamily: SERIF, fontSize: "clamp(32px, 5vw, 52px)", color: "#EDE9E3" }}
+                    style={{ fontFamily: SERIF, fontSize: "clamp(28px, 5vw, 48px)", color: "#EDE9E3" }}
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <div className="hidden md:block mt-4">
+                  <div className="hidden md:block mt-3">
                     <p className="text-[10px] font-medium uppercase tracking-[0.12em] mb-1" style={{ color: "#B0A89E" }}>2024</p>
                     <p className="text-[10px] font-medium uppercase tracking-[0.12em]" style={{ color: "#BF5C1A" }}>Live</p>
                   </div>
                 </div>
-                <div style={{ borderTop: BORDER, paddingTop: "20px" }}>
+                <div style={{ borderTop: BORDER, paddingTop: "16px" }}>
                   <h2
-                    className="font-bold tracking-[-0.01em] mb-3"
-                    style={{ fontFamily: SERIF, fontSize: "clamp(22px, 3vw, 30px)", color: "#1A1918" }}
+                    className="font-bold tracking-[-0.01em] mb-2"
+                    style={{ fontFamily: SERIF, fontSize: "clamp(20px, 3vw, 28px)", color: "#1A1918" }}
                   >
                     {project.title}
                   </h2>
-                  <p className="text-[13px] leading-[1.75] mb-3 max-w-[520px]" style={{ color: "#787369" }}>
+                  <p className="text-[13px] leading-[1.75] mb-2 max-w-[520px]" style={{ color: "#787369" }}>
                     {project.cardSummary}
                   </p>
-                  <p className="text-[10px] tracking-[0.04em] mb-5" style={{ color: "#B0A89E" }}>
+                  <p className="text-[10px] tracking-[0.04em] mb-4" style={{ color: "#B0A89E" }}>
                     {project.stack.slice(0, 5).join(" · ")}
                   </p>
                   <div className="flex items-center gap-6">
@@ -215,13 +213,13 @@ export default function Home() {
         </section>
 
         {/* ── About ─────────────────────────────────────────────────── */}
-        <section id="about" className="relative px-8 md:px-16 py-16 md:py-20 overflow-hidden" style={{ borderBottom: BORDER }}>
+        <section id="about" className="relative px-5 md:px-16 py-10 md:py-14 overflow-hidden" style={{ borderBottom: BORDER }}>
           <SectionNum n="03" />
-          <p className="text-[11px] font-medium uppercase tracking-[0.18em] mb-12" style={{ color: "#B0A89E" }}>About</p>
-          <div className="grid md:grid-cols-2 gap-10 md:gap-16 mb-14">
+          <p className="text-[11px] font-medium uppercase tracking-[0.18em] mb-6" style={{ color: "#B0A89E" }}>About</p>
+          <div className="grid md:grid-cols-2 gap-8 md:gap-14 mb-8 max-w-[860px]">
             <blockquote
-              className="text-[20px] italic leading-[1.5]"
-              style={{ fontFamily: SERIF, color: "#1A1918", borderLeft: "1.5px solid #BF5C1A", paddingLeft: "20px" }}
+              className="text-[18px] italic leading-[1.5]"
+              style={{ fontFamily: SERIF, color: "#1A1918", borderLeft: "1.5px solid #BF5C1A", paddingLeft: "18px" }}
             >
               "Reliability is a feature, not an afterthought."
             </blockquote>
@@ -233,7 +231,7 @@ export default function Home() {
               <span className="font-medium" style={{ color: "#1A1918" }}>LLM reasoning meets backend reliability.</span>
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-[860px]">
             {focusAreas.map((area) => (
               <div key={area.title} className="pt-4" style={{ borderTop: `1.5px solid ${area.accent ? "#BF5C1A" : "#E8E5DF"}` }}>
                 <p className="text-[9px] font-medium tracking-[0.14em] uppercase mb-2" style={{ color: "#B0A89E" }}>{area.num}</p>
@@ -245,12 +243,12 @@ export default function Home() {
         </section>
 
         {/* ── Stack ─────────────────────────────────────────────────── */}
-        <section id="stack" className="relative px-8 md:px-16 py-16 md:py-20 overflow-hidden" style={{ borderBottom: BORDER }}>
+        <section id="stack" className="relative px-5 md:px-16 py-10 md:py-14 overflow-hidden" style={{ borderBottom: BORDER }}>
           <SectionNum n="04" />
-          <p className="text-[11px] font-medium uppercase tracking-[0.18em] mb-10" style={{ color: "#B0A89E" }}>Stack</p>
+          <p className="text-[11px] font-medium uppercase tracking-[0.18em] mb-5" style={{ color: "#B0A89E" }}>Stack</p>
           <div className="max-w-[640px]" style={{ borderTop: BORDER }}>
             {stackRows.map((row) => (
-              <div key={row.label} className="grid gap-4 py-3 text-[12px]" style={{ borderBottom: BORDER, gridTemplateColumns: "100px 1fr" }}>
+              <div key={row.label} className="grid gap-4 py-3 text-[12px]" style={{ borderBottom: BORDER, gridTemplateColumns: "90px 1fr" }}>
                 <span className="font-medium" style={{ color: "#A09890" }}>{row.label}</span>
                 <span style={{ color: "#787369" }}>
                   {row.items.map((item, idx) => (
@@ -268,10 +266,10 @@ export default function Home() {
         </section>
 
         {/* ── Now ───────────────────────────────────────────────────── */}
-        <section id="now" className="relative px-8 md:px-16 py-16 md:py-20 overflow-hidden" style={{ borderBottom: BORDER }}>
+        <section id="now" className="relative px-5 md:px-16 py-10 md:py-14 overflow-hidden" style={{ borderBottom: BORDER }}>
           <SectionNum n="05" />
-          <p className="text-[11px] font-medium uppercase tracking-[0.18em] mb-10" style={{ color: "#B0A89E" }}>Now</p>
-          <div className="grid gap-y-5 max-w-[560px]" style={{ gridTemplateColumns: "80px 1fr" }}>
+          <p className="text-[11px] font-medium uppercase tracking-[0.18em] mb-5" style={{ color: "#B0A89E" }}>Now</p>
+          <div className="grid gap-y-4 max-w-[560px]" style={{ gridTemplateColumns: "80px 1fr" }}>
             {nowRows.map((row) => (
               <div key={row.label} className="contents">
                 <span className="text-[10px] font-medium uppercase tracking-[0.1em] pt-0.5" style={{ color: "#B0A89E" }}>{row.label}</span>
@@ -285,17 +283,17 @@ export default function Home() {
         </section>
 
         {/* ── Contact ───────────────────────────────────────────────── */}
-        <section id="contact" className="relative px-8 md:px-16 py-20 md:py-28 overflow-hidden" style={{ borderBottom: BORDER }}>
+        <section id="contact" className="relative px-5 md:px-16 py-14 md:py-20 overflow-hidden" style={{ borderBottom: BORDER }}>
           <SectionNum n="06" />
           <h2
-            className="font-bold italic leading-[0.88] mb-6 max-w-[640px]"
-            style={{ fontFamily: SERIF, fontSize: "clamp(52px, 8vw, 110px)", color: "#1A1918" }}
+            className="font-bold italic leading-[0.88] mb-5 max-w-[640px]"
+            style={{ fontFamily: SERIF, fontSize: "clamp(44px, 8vw, 110px)", color: "#1A1918" }}
           >
             Let's talk.
           </h2>
           <a
             href={`mailto:${siteConfig.email}`}
-            className="text-[14px] font-medium block mb-8 transition-opacity hover:opacity-60"
+            className="text-[14px] font-medium block mb-6 transition-opacity hover:opacity-60"
             style={{ color: "#BF5C1A" }}
           >
             {siteConfig.email}
@@ -309,7 +307,7 @@ export default function Home() {
 
         {/* Footer */}
         <footer
-          className="flex items-center justify-between px-8 md:px-16 py-5 text-[11px]"
+          className="flex items-center justify-between px-5 md:px-16 py-4 text-[11px]"
           style={{ color: "#B0A89E" }}
         >
           <span>© 2026 Pranav Chikte</span>

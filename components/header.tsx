@@ -66,7 +66,7 @@ export function Header() {
               key={item.name}
               href={item.link}
               onClick={() => setOpen(false)}
-              className="flex items-center px-8 py-4 text-[11px] font-medium uppercase tracking-[0.14em] transition-opacity hover:opacity-60"
+              className="flex items-center px-5 py-3 text-[11px] font-medium uppercase tracking-[0.14em] transition-opacity hover:opacity-60"
               style={{ color: isActive(item.link) ? "#BF5C1A" : "#9A9690", borderBottom: BORDER }}
             >
               {item.name}

@@ -24,7 +24,7 @@ export default function ResumePage() {
       <div className="pt-14">
         {/* Top bar */}
         <div
-          className="flex items-center justify-between px-8 md:px-16 py-5"
+          className="flex items-center justify-between px-5 md:px-16 py-4"
           style={{ borderBottom: BORDER }}
         >
           <Link
@@ -47,27 +47,27 @@ export default function ResumePage() {
         </div>
 
         {/* Header info */}
-        <div className="px-8 md:px-16 py-12" style={{ borderBottom: BORDER }}>
+        <div className="px-5 md:px-16 py-8" style={{ borderBottom: BORDER }}>
           <p className="text-[10px] font-medium uppercase tracking-[0.18em] mb-3" style={{ color: "#B0A89E" }}>
             Resume
           </p>
           <h1
             className="font-black leading-[0.9] tracking-[-0.02em]"
-            style={{ fontFamily: "var(--font-playfair), Georgia, serif", fontSize: "clamp(36px, 5vw, 64px)", color: "#1A1918" }}
+            style={{ fontFamily: "var(--font-playfair), Georgia, serif", fontSize: "clamp(32px, 5vw, 64px)", color: "#1A1918" }}
           >
             {siteConfig.name}
           </h1>
-          <p className="mt-3 text-[13px]" style={{ color: "#9A9690" }}>{siteConfig.role}</p>
+          <p className="mt-2 text-[13px]" style={{ color: "#9A9690" }}>{siteConfig.role}</p>
         </div>
 
         {/* PDF viewer */}
-        <div className="px-8 md:px-16 py-10">
+        <div className="px-5 md:px-16 py-6">
           <div style={{ border: BORDER, background: "#F2F0EB" }}>
             <iframe
               src={resumePath}
               title="Pranav Chikte Resume"
               className="w-full"
-              style={{ height: "78vh", display: "block" }}
+              style={{ height: "80vh", display: "block" }}
             />
           </div>
         </div>
